@@ -1,0 +1,26 @@
+{
+  "name": "style-dictionary-generator",
+  "version": "1.0.0",
+  "description": "A sample command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit test in `test/`.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "Pedro Silva",
+  "license": "MIT",
+  "scripts": {
+    "lint:fix": "eslint --fix ."
+  },
+  "dependencies": {
+    "lodash": "^4.17.21",
+    "style-dictionary": "^3.9.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-lodash-template": "^0.22.1",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1"
+  }
+}
