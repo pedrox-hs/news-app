@@ -14,3 +14,19 @@ dependencies:
 dev_dependencies:
   lints: ^2.0.0
   test: ^1.21.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Archivo
+      fonts:
+        - asset: assets/fonts/Archivo/Archivo-Bold.ttf
+          style: normal
+          weight: 700
+        - asset: assets/fonts/Archivo/Archivo-Medium.ttf
+          style: normal
+          weight: 600
+        - asset: assets/fonts/Archivo/Archivo-Regular.ttf
+          style: normal
+          weight: 400
