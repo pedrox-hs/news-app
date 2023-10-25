@@ -1,0 +1,14 @@
+{
+  "name": "ds",
+  "version": "1.0.0",
+  "description": "A sample command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit test in `test/`.",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "author": "Pedro Silva",
+  "license": "MIT",
+  "devDependencies": {
+    "style-dictionary-generator": "file:generator"
+  }
+}
