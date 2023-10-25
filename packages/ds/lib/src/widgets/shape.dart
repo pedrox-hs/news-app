@@ -1,5 +1,6 @@
-import 'package:ds/types/shape.dart';
 import 'package:flutter/widgets.dart';
+
+import '../types/shape.dart';
 
 class Shape extends StatelessWidget {
   const Shape({

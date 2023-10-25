@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../ds.dart';
+import '../tokens/dimen.dart';
+import '../tokens/shape.dart';
+import '../tokens/typography.dart';
+import 'button.dart';
+import 'shape.dart';
 
 class CardContent extends StatelessWidget {
   const CardContent({

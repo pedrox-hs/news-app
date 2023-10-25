@@ -1,5 +1,5 @@
 library ds;
 
-export 'tokens.dart';
-export 'widgets.dart';
-export 'types.dart';
+export 'src/tokens.dart';
+export 'src/widgets.dart';
+export 'src/types.dart';
