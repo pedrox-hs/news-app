@@ -1,7 +1,6 @@
-name: news
+name: news_feature
 description: A new Flutter package project.
 version: 0.0.1
-homepage:
 
 environment:
   sdk: '>=3.1.4 <4.0.0'
