@@ -20,21 +20,21 @@ mixin _$NewsState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Article> articles) loaded,
-    required TResult Function() error,
+    required TResult Function(ErrorData data) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Article> articles)? loaded,
-    TResult? Function()? error,
+    TResult? Function(ErrorData data)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Article> articles)? loaded,
-    TResult Function()? error,
+    TResult Function(ErrorData data)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -119,7 +119,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Article> articles) loaded,
-    required TResult Function() error,
+    required TResult Function(ErrorData data) error,
   }) {
     return loading();
   }
@@ -129,7 +129,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Article> articles)? loaded,
-    TResult? Function()? error,
+    TResult? Function(ErrorData data)? error,
   }) {
     return loading?.call();
   }
@@ -139,7 +139,7 @@ class _$LoadingStateImpl implements _LoadingState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Article> articles)? loaded,
-    TResult Function()? error,
+    TResult Function(ErrorData data)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -259,7 +259,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Article> articles) loaded,
-    required TResult Function() error,
+    required TResult Function(ErrorData data) error,
   }) {
     return loaded(articles);
   }
@@ -269,7 +269,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Article> articles)? loaded,
-    TResult? Function()? error,
+    TResult? Function(ErrorData data)? error,
   }) {
     return loaded?.call(articles);
   }
@@ -279,7 +279,7 @@ class _$LoadedStateImpl implements _LoadedState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Article> articles)? loaded,
-    TResult Function()? error,
+    TResult Function(ErrorData data)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -337,6 +337,8 @@ abstract class _$$ErrorStateImplCopyWith<$Res> {
   factory _$$ErrorStateImplCopyWith(
           _$ErrorStateImpl value, $Res Function(_$ErrorStateImpl) then) =
       __$$ErrorStateImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ErrorData data});
 }
 
 /// @nodoc
@@ -346,35 +348,59 @@ class __$$ErrorStateImplCopyWithImpl<$Res>
   __$$ErrorStateImplCopyWithImpl(
       _$ErrorStateImpl _value, $Res Function(_$ErrorStateImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$ErrorStateImpl(
+      null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as ErrorData,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$ErrorStateImpl implements _ErrorState {
-  _$ErrorStateImpl();
+  _$ErrorStateImpl(this.data);
+
+  @override
+  final ErrorData data;
 
   @override
   String toString() {
-    return 'NewsState.error()';
+    return 'NewsState.error(data: $data)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ErrorStateImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorStateImpl &&
+            (identical(other.data, data) || other.data == data));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, data);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
+      __$$ErrorStateImplCopyWithImpl<_$ErrorStateImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loading,
     required TResult Function(List<Article> articles) loaded,
-    required TResult Function() error,
+    required TResult Function(ErrorData data) error,
   }) {
-    return error();
+    return error(data);
   }
 
   @override
@@ -382,9 +408,9 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loading,
     TResult? Function(List<Article> articles)? loaded,
-    TResult? Function()? error,
+    TResult? Function(ErrorData data)? error,
   }) {
-    return error?.call();
+    return error?.call(data);
   }
 
   @override
@@ -392,11 +418,11 @@ class _$ErrorStateImpl implements _ErrorState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loading,
     TResult Function(List<Article> articles)? loaded,
-    TResult Function()? error,
+    TResult Function(ErrorData data)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(data);
     }
     return orElse();
   }
@@ -437,5 +463,10 @@ class _$ErrorStateImpl implements _ErrorState {
 }
 
 abstract class _ErrorState implements NewsState {
-  factory _ErrorState() = _$ErrorStateImpl;
+  factory _ErrorState(final ErrorData data) = _$ErrorStateImpl;
+
+  ErrorData get data;
+  @JsonKey(ignore: true)
+  _$$ErrorStateImplCopyWith<_$ErrorStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

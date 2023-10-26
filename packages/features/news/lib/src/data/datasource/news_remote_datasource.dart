@@ -28,6 +28,8 @@ class NewsRemoteDatasource implements INewsRemoteDatasource {
       ),
     );
 
+    if (response.statusCode != 200) throw Exception(response.body);
+
     final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
     return NewsResultModel.fromJson(jsonResponse);
   }

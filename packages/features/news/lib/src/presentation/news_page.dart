@@ -1,6 +1,7 @@
 import 'package:commons/commons.dart';
 import 'package:ds/ds.dart';
 import 'package:flutter/material.dart';
+import 'package:news_feature/src/presentation/news_state.dart';
 import 'package:provider/provider.dart';
 
 import '../domain/entity/article.dart';
@@ -36,7 +37,7 @@ class _ContentWidget extends StatelessWidget {
     return state.when(
       loading: () => const _LoadingStateWidget(),
       loaded: (articles) => _LoadedStateWidget(articles),
-      error: () => const _ErrorStateWidget(),
+      error: (data) => _ErrorStateWidget(data),
     );
   }
 }

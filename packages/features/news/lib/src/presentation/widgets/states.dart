@@ -10,11 +10,28 @@ class _LoadingStateWidget extends StatelessWidget {
 }
 
 class _ErrorStateWidget extends StatelessWidget {
-  const _ErrorStateWidget();
+  _ErrorStateWidget(ErrorData data)
+      : icon = data.icon,
+        title = data.title,
+        description = data.description,
+        buttonText = data.buttonText;
+
+  final PictureAsset icon;
+  final String title;
+  final String description;
+  final String buttonText;
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return FeedbackWidget(
+      icon: icon,
+      title: title,
+      description: description,
+      button: Button.primary(
+        text: buttonText,
+        onPressed: () => context.read<NewsViewModel>().retry(),
+      ),
+    );
   }
 }
 
@@ -30,16 +47,19 @@ class _LoadedStateWidget extends StatelessWidget {
       viewModel.loadMore();
     });
 
-    return ListView.builder(
-      controller: scrollController,
-      itemCount: articles.length,
-      padding: AppSpacingSquish.quarck,
-      itemBuilder: (_, index) => ArticleWidget(
-        articles[index],
-        onReadMorePressed: (article) {
-          final viewModel = context.read<NewsViewModel>();
-          viewModel.readMore(article);
-        },
+    return RefreshIndicator.adaptive(
+      onRefresh: () => context.read<NewsViewModel>().refresh(),
+      child: ListView.builder(
+        controller: scrollController,
+        itemCount: articles.length,
+        padding: AppSpacingSquish.quarck,
+        itemBuilder: (_, index) => ArticleWidget(
+          articles[index],
+          onReadMorePressed: (article) {
+            final viewModel = context.read<NewsViewModel>();
+            viewModel.readMore(article);
+          },
+        ),
       ),
     );
   }
