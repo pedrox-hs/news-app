@@ -15,9 +15,9 @@ class CardContent extends StatelessWidget {
     required this.button,
   });
 
-  final String title;
-  final String subtitle;
-  final String content;
+  final String? title;
+  final String? subtitle;
+  final String? content;
   final Button button;
 
   @override
@@ -27,24 +27,57 @@ class CardContent extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: AppTextStyle.headingSmall,
-          ),
-          SizedBox(height: AppSpacingStack.xxxs),
-          Text(
-            subtitle,
-            style: AppTextStyle.subtitleSmall,
-          ),
-          SizedBox(height: AppSpacingStack.xxs),
-          Text(
-            content,
-            style: AppTextStyle.paragraph,
-          ),
-          SizedBox(height: AppSpacingStack.sm),
+          if (title != null) Heading(title!),
+          if (subtitle != null) Subtitle(subtitle!),
+          if (content != null) Paragraph(content!),
           button,
         ],
       ),
     );
   }
+}
+
+class Typography extends Padding {
+  Typography(
+    String text, {
+    required TextStyle style,
+    EdgeInsets? margin,
+    super.key,
+  }) : super(
+          padding: margin ?? EdgeInsets.zero,
+          child: Text(
+            text,
+            style: style,
+          ),
+        );
+}
+
+class Heading extends Typography {
+  Heading(
+    super.text, {
+    super.key,
+  }) : super(
+          style: AppTextStyle.headingSmall,
+          margin: EdgeInsets.only(bottom: AppSpacingStack.xxxs),
+        );
+}
+
+class Subtitle extends Typography {
+  Subtitle(
+    super.text, {
+    super.key,
+  }) : super(
+          style: AppTextStyle.subtitleSmall,
+          margin: EdgeInsets.only(bottom: AppSpacingStack.xxs),
+        );
+}
+
+class Paragraph extends Typography {
+  Paragraph(
+    super.text, {
+    super.key,
+  }) : super(
+          style: AppTextStyle.paragraph,
+          margin: EdgeInsets.only(bottom: AppSpacingStack.sm),
+        );
 }
