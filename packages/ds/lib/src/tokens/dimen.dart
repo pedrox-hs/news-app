@@ -59,19 +59,19 @@ class AppShadowLevel {
 }
 
 class AppSpacingStack {
-  static double quarck = 4;
-  static double nano = 8;
-  static double xxxs = 16;
-  static double xxs = 24;
-  static double xs = 32;
-  static double sm = 40;
-  static double md = 48;
-  static double lg = 56;
-  static double xl = 64;
-  static double xxl = 80;
-  static double xxxl = 120;
-  static double huge = 160;
-  static double giant = 200;
+  static const double quarck = 4;
+  static const double nano = 8;
+  static const double xxxs = 16;
+  static const double xxs = 24;
+  static const double xs = 32;
+  static const double sm = 40;
+  static const double md = 48;
+  static const double lg = 56;
+  static const double xl = 64;
+  static const double xxl = 80;
+  static const double xxxl = 120;
+  static const double huge = 160;
+  static const double giant = 200;
 }
 
 class AppSpacingInset {
@@ -104,4 +104,9 @@ class AppSpacingInline {
   static EdgeInsets get md => EdgeInsets.only(right: 48);
   static EdgeInsets get lg => EdgeInsets.only(right: 64);
   static EdgeInsets get xl => EdgeInsets.only(right: 80);
+}
+
+class AppSizingIcon {
+  static const double xs = 24;
+  static const double lg = 96;
 }
