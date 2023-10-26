@@ -1,3 +1,4 @@
+import 'package:commons/commons.dart';
 import 'package:ds/ds.dart';
 import 'package:flutter/widgets.dart';
 
@@ -10,11 +11,10 @@ class ArticleWidget extends StatelessWidget {
     this.article, {
     OnReadMorePressed? onReadMorePressed,
     super.key,
-  }) : _onReadMorePressed =
-            _OnReadMorePressed.orNull(onReadMorePressed, article);
+  }) : _onReadMorePressed = CallbackValue.orNull(onReadMorePressed, article);
 
   final Article article;
-  final _OnReadMorePressed? _onReadMorePressed;
+  final VoidCallback? _onReadMorePressed;
 
   @override
   Widget build(BuildContext context) {
@@ -26,27 +26,9 @@ class ArticleWidget extends StatelessWidget {
         content: article.content,
         button: Button.primary(
           text: 'Ler mais',
-          onPressed: _onReadMorePressed?.call,
+          onPressed: _onReadMorePressed,
         ),
       ),
     );
   }
-}
-
-class _OnReadMorePressed  {
-  _OnReadMorePressed(this.callback);
-
-  final VoidCallback callback;
-
-  static _OnReadMorePressed? orNull<T>(
-    void Function(T value)? callback,
-    T value,
-  ) {
-    if (callback != null) {
-      return _OnReadMorePressed(() => callback(value));
-    }
-    return null;
-  }
-
-  void call() => callback();
 }
