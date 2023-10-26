@@ -1,20 +1,24 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 import 'ext/request.dart';
 
 /// https://newsapi.org/s/google-news-br-api
-const String newsApiUrl = String.fromEnvironment('NEWS_API_URL');
-const String newsApiKey = String.fromEnvironment('NEWS_API_KEY');
+const String _newsApiUrl = String.fromEnvironment('NEWS_API_URL');
+const String _newsApiKey = String.fromEnvironment('NEWS_API_KEY');
 
-class NewsHttpClient extends http.BaseClient {
+class NewsHttpClient extends BaseClient {
   NewsHttpClient({
-    String baseUrl = newsApiUrl,
-    http.Client? inner,
-  })  : _inner = inner ?? http.Client(),
-        baseUrl = Uri.parse(baseUrl);
+    String baseUrl = _newsApiUrl,
+    String apiKey = _newsApiKey,
+    Client? inner,
+  })  : _inner = inner ?? Client(),
+        _baseUrl = Uri.parse(baseUrl),
+        _apiKey = apiKey;
 
-  final http.Client _inner;
-  final Uri baseUrl;
+  final Client _inner;
+
+  final Uri _baseUrl;
+  final String _apiKey;
 
   @override
   void close() {
@@ -22,14 +26,14 @@ class NewsHttpClient extends http.BaseClient {
   }
 
   @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) async {
+  Future<StreamedResponse> send(BaseRequest request) async {
     final url = request.url;
 
-    http.BaseRequest newRequest = request.copyWith(
-      url: baseUrl.resolveUri(url),
+    BaseRequest newRequest = request.copyWith(
+      url: _baseUrl.resolveUri(url),
       headers: {
         ...request.headers,
-        'X-Api-Key': newsApiKey,
+        'X-Api-Key': _apiKey,
       },
     );
 
