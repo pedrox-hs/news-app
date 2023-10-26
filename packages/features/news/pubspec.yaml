@@ -1,6 +1,7 @@
 name: news_feature
 description: A new Flutter package project.
 version: 0.0.1
+publish_to: 'none'
 
 environment:
   sdk: '>=3.1.4 <4.0.0'
@@ -9,11 +10,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.1.0
+  provider: ^6.0.5
+  freezed_annotation: ^2.4.1
+  ds:
+    path: ../../ds
+  navigation:
+    path: ../../core/navigation
+  commons:
+    path: ../../commons
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  build_runner: ^2.4.6
+  freezed: ^2.4.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
