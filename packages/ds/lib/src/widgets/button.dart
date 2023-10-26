@@ -28,17 +28,10 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: style,
-        ),
-      ),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        child: Text(text),
-        style: style,
-      ),
+    return ElevatedButton(
+      onPressed: onPressed,
+      child: Text(text),
+      style: style,
     );
   }
 }
