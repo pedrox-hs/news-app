@@ -49,6 +49,6 @@ class _ButtonOverlayColor extends MaterialStateProperty<Color?>
     if (states.contains(MaterialState.hovered)) {
       return overlay;
     }
-    return null;
+    return overlay.withOpacity(1);
   }
 }
