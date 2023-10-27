@@ -5,11 +5,11 @@ import 'package:http/testing.dart';
 import 'package:network/network.dart';
 import 'package:test/test.dart';
 
-const String newsApiUrl = 'https://newsapi.org/v2/';
-const String newsApiKey = '1234567890';
+const String _apiUrl = 'https://example.org/v2/';
+const Map<String, String> _defaultHeaders = {'X-Api-Key': 'API_KEY'};
 
 void main() {
-  group(NewsHttpClient, () {
+  group(HttpClient, () {
     late Client sut;
 
     late Client mockClient;
@@ -27,10 +27,10 @@ void main() {
         ),
       );
 
-      sut = NewsHttpClient(
+      sut = HttpClient(
         inner: mockClient,
-        baseUrl: newsApiUrl,
-        apiKey: newsApiKey,
+        baseUrl: _apiUrl,
+        defaultHeaders: _defaultHeaders,
       );
     });
 
@@ -39,17 +39,17 @@ void main() {
     });
 
     test('should call provided API url', () async {
-      final result = await sut.get(Uri(path: 'top-headlines'));
+      final response = await sut.get(Uri(path: 'foo/bar'));
 
-      expect(result.statusCode, 200);
-      expect(jsonDecode(result.body)['url'], '${newsApiUrl}top-headlines');
+      expect(response.statusCode, 200);
+      expect(response.bodyAsJson!['url'], '${_apiUrl}foo/bar');
     });
 
     test('should call provided API key', () async {
-      final result = await sut.get(Uri(path: 'top-headlines'));
+      final response = await sut.get(Uri(path: 'baz'));
 
-      expect(result.statusCode, 200);
-      expect(jsonDecode(result.body)['headers']['X-Api-Key'], newsApiKey);
+      expect(response.statusCode, 200);
+      expect(response.bodyAsJson!['headers'], _defaultHeaders);
     });
   });
 }

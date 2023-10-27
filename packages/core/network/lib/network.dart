@@ -1,4 +1,6 @@
 library network;
 
-export 'src/client.dart';
 export 'package:http/http.dart' show Client;
+
+export 'src/client.dart';
+export 'src/extensions/response.dart';

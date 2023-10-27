@@ -1,6 +1,6 @@
 import 'package:http/http.dart';
 
-extension RequestExt<T extends BaseRequest> on T {
+extension RequestX<T extends BaseRequest> on T {
   BaseRequest copyWith({
     String? method,
     Uri? url,

@@ -1,29 +1,20 @@
 import 'package:http/http.dart';
 
-import 'ext/request.dart';
+import 'extensions/request.dart';
 
-/// https://newsapi.org/s/google-news-br-api
-const String _newsApiUrl = String.fromEnvironment('NEWS_API_URL');
-const String _newsApiKey = String.fromEnvironment('NEWS_API_KEY');
-
-class NewsHttpClient extends BaseClient {
-  NewsHttpClient({
-    String baseUrl = _newsApiUrl,
-    String apiKey = _newsApiKey,
+class HttpClient extends BaseClient {
+  HttpClient({
+    required String baseUrl,
+    Map<String, String> defaultHeaders = const {},
     Client? inner,
   })  : _inner = inner ?? Client(),
         _baseUrl = Uri.parse(baseUrl),
-        _apiKey = apiKey;
+        _defaultHeaders = defaultHeaders;
 
   final Client _inner;
 
   final Uri _baseUrl;
-  final String _apiKey;
-
-  @override
-  void close() {
-    _inner.close();
-  }
+  final Map<String, String> _defaultHeaders;
 
   @override
   Future<StreamedResponse> send(BaseRequest request) async {
@@ -32,11 +23,16 @@ class NewsHttpClient extends BaseClient {
     BaseRequest newRequest = request.copyWith(
       url: _baseUrl.resolveUri(url),
       headers: {
+        ..._defaultHeaders,
         ...request.headers,
-        'X-Api-Key': _apiKey,
       },
     );
 
     return await _inner.send(newRequest);
+  }
+
+  @override
+  void close() {
+    _inner.close();
   }
 }
