@@ -42,12 +42,17 @@ class Typography extends Padding {
     String text, {
     required TextStyle style,
     EdgeInsets? margin,
+    int? maxLines,
     super.key,
   }) : super(
           padding: margin ?? EdgeInsets.zero,
           child: Text(
             text,
+            maxLines: maxLines,
             style: style,
+            overflow: TextOverflow.ellipsis,
+            textScaleFactor: 0.8,
+            softWrap: true,
           ),
         );
 }
@@ -59,6 +64,7 @@ class Heading extends Typography {
   }) : super(
           style: AppTextStyle.headingSmall,
           margin: EdgeInsets.only(bottom: AppSpacingStack.xxxs),
+          maxLines: 2,
         );
 }
 
@@ -69,6 +75,7 @@ class Subtitle extends Typography {
   }) : super(
           style: AppTextStyle.subtitleSmall,
           margin: EdgeInsets.only(bottom: AppSpacingStack.xxs),
+          maxLines: 3,
         );
 }
 
@@ -78,6 +85,7 @@ class Paragraph extends Typography {
     super.key,
   }) : super(
           style: AppTextStyle.paragraph,
+          maxLines: 10,
           margin: EdgeInsets.only(bottom: AppSpacingStack.sm),
         );
 }

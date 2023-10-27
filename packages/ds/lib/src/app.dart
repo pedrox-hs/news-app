@@ -1,5 +1,6 @@
 library ds;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'tokens/color.dart';
@@ -8,12 +9,14 @@ import 'tokens/typography.dart';
 class App extends StatelessWidget {
   const App({
     Key? key,
-    required this.title,
+    this.title = '',
     required this.home,
+    this.debugShowCheckedModeBanner = kDebugMode,
   });
 
   final String title;
   final Widget home;
+  final bool debugShowCheckedModeBanner;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +29,7 @@ class App extends StatelessWidget {
         textTheme: theme.textTheme.apply(fontFamily: AppFontFamily.highlight),
       ),
       home: home,
+      debugShowCheckedModeBanner: false,
     );
   }
 }
