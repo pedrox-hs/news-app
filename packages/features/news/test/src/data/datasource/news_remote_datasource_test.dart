@@ -1,7 +1,8 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:commons_foundation/foundation.dart';
-import 'package:commons_testing/testing.dart';
+import 'package:commons_testing/unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:news_feature/src/data/datasource/news_remote_datasource.dart';
@@ -23,12 +24,12 @@ void main() {
       final randomPage = Random().nextInt(100);
       final expectedUri = Uri(path: 'top-headlines');
       final content = FileX.fromFixtureJson('news_success_response');
-      
+
       Request? actualRequest;
       mockClient.handler.enqueue(
         (request) async {
           actualRequest = request;
-          return Response(content.readAsStringSync(), 200);
+          return Response(content.readAsStringSync(), HttpStatus.ok);
         },
       );
 
@@ -47,7 +48,7 @@ void main() {
       const expected = newsResponseFixture;
       final content = FileX.fromFixtureJson('news_success_response');
       mockClient.handler.enqueue(
-        (_) async => Response(content.readAsStringSync(), 200),
+        (_) async => Response(content.readAsStringSync(), HttpStatus.ok),
       );
 
       // act
