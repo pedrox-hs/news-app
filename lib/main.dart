@@ -18,7 +18,7 @@ void main() {
 class GoogleNewsApp extends App {
   GoogleNewsApp({super.key})
       : super(
-          title: 'Google News App',
+          title: 'News App',
           home: MultiProvider(
             providers: [
               Provider<Client>(

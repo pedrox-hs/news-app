@@ -23,7 +23,7 @@ class NewsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Google News App'),
+        title: const Text('News App'),
       ),
       body: const _ContentWidget(),
     );
