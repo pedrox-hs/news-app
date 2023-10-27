@@ -231,6 +231,11 @@ As principais bibliotecas utilizadas para a implementação dos testes são:
 
 Possíveis evoluções para o projeto:
 
+- [ ] **Responsividade:** Melhorar a experiência do usuário em dispositivos com telas maiores, como tablets e desktops;
+- [ ] **Tratamento de Erros:** Melhorar o tratamento de erros, exibindo mensagens mais amigáveis e tratando erros específicos;
+- [ ] **Skeletons:** Implementar skeletons para melhorar a experiência do usuário enquanto os dados são carregados;
+- [ ] **Icone da Aplicação:** Criar um ícone para a aplicação;
+- [ ] **Scroll Infinito:** Melhorar a experiência do scroll infinito, incluindo loading e feedback de erro;
 - [ ] **Automatizar a Geração de Código a partir do Arquivo de Design Tokens:** Com tempo hábil e alinhamento com o time de design e outros desenvolvedores, seria possível automatizar a geração de código a partir do arquivo exportado pelo Figma, utilizando o `style-dictionary` em uma biblioteca própria para o Flutter;
 - [ ] **Galeria do DS:** Criar uma galeria com todos os componentes do DS, para facilitar a visualização e testes dos componentes, que pode ser automatizada;
 - [ ] **CI/CD:** Configurar o CI/CD para executar os testes, análise estática e gerar os artefatos de compilação para as plataformas suportadas, inclusive publicando-os em suas respectivas lojas e no GitHub Pages;
