@@ -1,7 +1,7 @@
 import 'package:news_feature/src/domain/entity/article.dart';
 
 class ArticleModel extends Article {
-  ArticleModel({
+  const ArticleModel({
     required super.title,
     required super.subtitle,
     required super.content,

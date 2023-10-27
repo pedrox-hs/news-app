@@ -47,19 +47,16 @@ class _LoadedStateWidget extends StatelessWidget {
       viewModel.loadMore();
     });
 
-    return RefreshIndicator.adaptive(
-      onRefresh: () => context.read<NewsViewModel>().refresh(),
-      child: ListView.builder(
-        controller: scrollController,
-        itemCount: articles.length,
-        padding: AppSpacingSquish.quarck,
-        itemBuilder: (_, index) => ArticleWidget(
-          articles[index],
-          onReadMorePressed: (article) {
-            final viewModel = context.read<NewsViewModel>();
-            viewModel.readMore(article);
-          },
-        ),
+    return ListView.builder(
+      controller: scrollController,
+      itemCount: articles.length,
+      padding: AppSpacingSquish.quarck,
+      itemBuilder: (_, index) => ArticleWidget(
+        articles[index],
+        onReadMorePressed: (article) {
+          final viewModel = context.read<NewsViewModel>();
+          viewModel.readMore(article);
+        },
       ),
     );
   }

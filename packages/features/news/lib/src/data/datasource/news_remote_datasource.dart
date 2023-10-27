@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:http/http.dart';
+import 'package:network/network.dart';
 
 import '../model/news.dart';
 
@@ -28,9 +26,9 @@ class NewsRemoteDatasource implements INewsRemoteDatasource {
       ),
     );
 
-    if (response.statusCode != 200) throw Exception(response.body);
+    if (response.isFailed) throw Exception(response.body);
 
-    final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+    final jsonResponse = response.bodyAsJson as Map<String, dynamic>;
     return NewsResultModel.fromJson(jsonResponse);
   }
 }

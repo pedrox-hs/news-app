@@ -1,11 +1,12 @@
+import 'package:equatable/equatable.dart';
 import 'package:news_feature/src/data/model/article.dart';
 
 import '../../domain/entity/article.dart';
 
-class NewsResultModel {
+class NewsResultModel extends Equatable {
   final List<Article> articles;
 
-  NewsResultModel({
+  const NewsResultModel({
     required this.articles,
   });
 
@@ -15,4 +16,7 @@ class NewsResultModel {
       articles: list.map((e) => ArticleModel.fromJson(e)).toList(),
     );
   }
+
+  @override
+  List<Object?> get props => [articles];
 }

@@ -15,10 +15,13 @@ dependencies:
   freezed_annotation: ^2.4.1
   ds:
     path: ../../ds
+  commons_foundation:
+    path: ../../commons/foundation
   navigation:
     path: ../../core/navigation
-  commons:
-    path: ../../commons
+  network:
+    path: ../../core/network
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -26,12 +29,17 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   build_runner: ^2.4.6
   freezed: ^2.4.5
+  mocktail: ^1.0.1
+  commons_testing:
+    path: ../../commons/testing
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
+  uses-material-design: true
+
 
   # To add assets to your package, add an assets section, like this:
   # assets:

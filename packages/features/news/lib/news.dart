@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'src/data/datasource/news_remote_datasource.dart';
-import 'src/data/news_repository.dart';
+import 'src/data/repository/news_repository.dart';
 import 'src/domain/get_news_usecase.dart';
 import 'src/presentation/news_page.dart';
 import 'src/presentation/news_view_model.dart';
@@ -17,7 +17,7 @@ class NewsModule extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider<NewsViewModel>(
-          create: (context) => NewsViewModel(
+          create: (context) => NewsViewModel.create(
             navigator: context.read(),
             getNews: GetNewsUseCase(
               repository: NewsRepository(

@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:ds/ds.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
@@ -8,70 +7,101 @@ import '../domain/entity/article.dart';
 import '../domain/get_news_usecase.dart';
 import 'news_state.dart';
 
-class NewsViewModel with ChangeNotifier {
-  NewsViewModel({
+abstract class NewsViewModel with ChangeNotifier {
+  NewsViewModel();
+
+  factory NewsViewModel.create({
     required GetNewsUseCase getNews,
-    required this.navigator,
-  }) : _getNews = getNews {
-    unawaited(_tryLoad());
-  }
+    required IAppNavigator navigator,
+  }) = NewsViewModelBase;
+
+  @visibleForTesting
+  NewsState currentState = const NewsState.loading();
+  NewsState get state => currentState;
+
+  Future<void> load();
+  Future<void> refresh();
+
+  Future<void> retry();
+  Future<void> loadMore();
+  Future<void> readMore(Article article);
+}
+
+@visibleForTesting
+class NewsViewModelBase extends NewsViewModel {
+  NewsViewModelBase({
+    required GetNewsUseCase getNews,
+    required IAppNavigator navigator,
+  })  : _getNews = getNews,
+        _navigator = navigator;
 
   final GetNewsUseCase _getNews;
-  final IAppNavigator navigator;
+  final IAppNavigator _navigator;
 
-  NewsState state = NewsState.loading();
+  bool get _canLoadMore => state.maybeMap(
+        completed: (state) => false,
+        orElse: () => true,
+      );
+
   set _state(NewsState value) {
-    state = value;
-    notifyListeners();
+    if (currentState != value) {
+      currentState = value;
+      notifyListeners();
+    }
   }
 
-  final List<Article> _articles = [];
-  int _currentPage = 0;
-  bool _hasMore = true;
+  @override
+  Future<void> load() => _loadFirstPage();
 
-  Future<void> refresh() async {
-    _articles.clear();
-    _tryLoad();
+  @override
+  Future<void> refresh() => _loadFirstPage();
+
+  @override
+  Future<void> retry() async {
+    state.mapOrNull(
+      error: (_) {
+        _state = const NewsState.loading();
+        _loadNextPage();
+      },
+    );
   }
 
-  void retry() async {
-    _state = NewsState.loading();
-    await _tryLoad();
+  @override
+  Future<void> loadMore() async {
+    if (!_canLoadMore) return;
+    await _loadNextPage();
   }
 
-  void loadMore() async {
-    if (!_hasMore) return;
-    await _tryLoad(page: _currentPage + 1);
+  @override
+  Future<void> readMore(Article article) async {
+    await _navigator.openUrl(article.url);
   }
 
-  void readMore(Article article) async {
-    await navigator.openUrl(article.url);
+  Future<void> _loadFirstPage() async {
+    await _loadToState(kFirstPage);
   }
 
-  Future<void> _tryLoad({int page = 1}) async {
-    _state = await _load(page: page).catchError(_onError);
+  Future<void> _loadNextPage() async {
+    await _loadToState(state.nextPage);
   }
 
-  Future<NewsState> _load({int page = 1}) async {
+  Future<void> _loadToState(int page) async {
+    _state = await _load(page).catchError(_onError);
+  }
+
+  Future<NewsState> _load(int page) async {
     final articles = await _getNews(page: page);
+    final updated = page == kFirstPage ? articles : state.articles + articles;
 
-    _currentPage = page;
-    _hasMore = articles.isNotEmpty;
-    _articles.addAll(articles);
-    return NewsState.loaded(_articles);
+    return articles.isNotEmpty
+        ? NewsState.loaded(page, updated)
+        : NewsState.completed(page, updated);
   }
 
   NewsState _onError(error) {
     return state.maybeMap(
       loaded: (state) => state,
-      orElse: () => NewsState.error(
-        ErrorData(
-          icon: const LocalSvgAsset(AppAsset.illustrationError),
-          title: 'Ops!',
-          description: 'Não foi possível carregar as notícias.',
-          buttonText: 'Tentar novamente',
-        ),
-      ),
+      orElse: () => const NewsState.error(GenericErrorData()),
     );
   }
 }
