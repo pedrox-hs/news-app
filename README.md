@@ -116,7 +116,7 @@ Além disso, utilizei a classe [ChangeNotifierProvider](https://docs.flutter.dev
 
 ### Requisitos
 
-- [SDK Flutter](https://flutter.dev/docs/get-started/install) >=3.13.0
+- [SDK Flutter](https://flutter.dev/docs/get-started/install) >=3.13.9
 - Chave de API para a [News API](https://newsapi.org/)
 - Opcional: [make](https://www.gnu.org/software/make/), para facilitar a execução de alguns comandos.
 - Itens opcionais de acordo com a plataforma para a qual deseja compilar:
