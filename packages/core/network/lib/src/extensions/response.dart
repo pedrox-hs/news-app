@@ -1,13 +1,19 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart';
 
 extension ResponseX on Response {
-  bool get isSuccessful => statusCode >= 200 && statusCode < 300;
+  bool get isSuccessful =>
+      statusCode >= HttpStatus.ok && statusCode < HttpStatus.multipleChoices;
 
-  bool get isClientError => statusCode >= 400 && statusCode < 500;
+  bool get isClientError =>
+      statusCode >= HttpStatus.badRequest &&
+      statusCode < HttpStatus.internalServerError;
 
-  bool get isServerError => statusCode >= 500 && statusCode < 600;
+  bool get isServerError =>
+      statusCode >= HttpStatus.internalServerError &&
+      statusCode <= HttpStatus.networkConnectTimeoutError;
 
   bool get isFailed => isClientError || isServerError;
 
