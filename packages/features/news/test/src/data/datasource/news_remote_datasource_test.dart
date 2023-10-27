@@ -22,7 +22,7 @@ void main() {
     test('should make request correctly', () async {
       // arrange
       final randomPage = Random().nextInt(100);
-      final expectedUri = Uri(path: 'top-headlines');
+      final expectedUri = Uri(path: 'everything');
       final content = FileX.fromFixtureJson('news_success_response');
 
       Request? actualRequest;

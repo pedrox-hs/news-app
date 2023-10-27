@@ -17,9 +17,9 @@ class NewsRemoteDatasource implements INewsRemoteDatasource {
   Future<NewsResultModel> getNews({required int page}) async {
     final response = await _client.get(
       Uri(
-        path: 'top-headlines',
+        path: 'everything',
         queryParameters: {
-          'sources': 'google-news-br',
+          'sources': 'google-news-br,info-money,globo,blasting-news-br',
           'page': '$page',
           'pageSize': '5',
         },
