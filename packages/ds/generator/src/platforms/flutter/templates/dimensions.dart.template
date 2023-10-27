@@ -1,0 +1,17 @@
+<%
+/* global context */
+const _ = require('lodash')
+const { file, dictionary: { properties } } = context;
+%>
+
+<%
+    Object.getOwnPropertyNames(properties).forEach((part) => {
+        let parts = [file.prefix || '', part]
+        Object.getOwnPropertyNames(properties[part]).forEach((part) => {
+            %>
+            class <%= [...parts, part].map(_.startCase).join('') %> {
+            }
+            <%
+        })
+    })
+%>

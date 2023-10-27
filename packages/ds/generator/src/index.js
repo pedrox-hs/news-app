@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 const _template = require('lodash/template')
+const formatHelpers = require('style-dictionary/lib/common/formatHelpers')
 
 const platformsPath = path.join(__dirname, 'platforms')
 
@@ -21,8 +22,17 @@ const templateDefinition = (platform, templateName) => {
   const templateFile = path.resolve(__dirname, 'platforms', platform, 'templates', templateName)
   return {
     [fullName]: function _templateBuilder ({ dictionary, options, file }) {
-      const template = _template(templateFile)
-      return template()
+      const templateContent = fs.readFileSync(templateFile)
+      const template = _template(templateContent)
+      return template({
+        require,
+        context: {
+          file,
+          options,
+          dictionary,
+          formatHelpers,
+        },
+      })
     },
   }
 }
