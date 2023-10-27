@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:http/http.dart';
 import 'package:http/testing.dart' as http;
 
@@ -22,3 +24,16 @@ class RequestHandler {
   }
 }
 
+http.MockClientHandler respondWithJson(
+  File file, {
+  int statusCode = HttpStatus.ok,
+}) =>
+    (request) async {
+      return Response(
+        file.readAsStringSync(),
+        statusCode,
+        headers: {
+          HttpHeaders.contentTypeHeader: ContentType.json.toString(),
+        },
+      );
+    };
