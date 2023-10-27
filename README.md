@@ -1,4 +1,4 @@
-# Google News App
+# News App
 
 Repositório com o código-fonte da solução para o desafio técnico da [Meiuca](https://www.meiuca.co/en).
 
@@ -237,6 +237,7 @@ Possíveis evoluções para o projeto:
 - [ ] **Icone da Aplicação:** Criar um ícone para a aplicação;
 - [ ] **Scroll Infinito:** Melhorar a experiência do scroll infinito, incluindo loading e feedback de erro;
 - [ ] **Automatizar a Geração de Código a partir do Arquivo de Design Tokens:** Com tempo hábil e alinhamento com o time de design e outros desenvolvedores, seria possível automatizar a geração de código a partir do arquivo exportado pelo Figma, utilizando o `style-dictionary` em uma biblioteca própria para o Flutter;
+- [ ] **Design Tokens de Componentes:** Criar um arquivo de Design Tokens específico para os componentes, utilizando a sintaxe do `style-dictionary` para facilitar a geração de código;
 - [ ] **Galeria do DS:** Criar uma galeria com todos os componentes do DS, para facilitar a visualização e testes dos componentes, que pode ser automatizada;
 - [ ] **CI/CD:** Configurar o CI/CD para executar os testes, análise estática e gerar os artefatos de compilação para as plataformas suportadas, inclusive publicando-os em suas respectivas lojas e no GitHub Pages;
 - [ ] **Mais Testes:** Implementar mais testes unitários, de integração e de UI, inclusive para os componentes e interações;
