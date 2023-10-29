@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'dart:ui';
 
 abstract class AppColor {
   static const brandPrimary01 = Color(0xFF691C07);
