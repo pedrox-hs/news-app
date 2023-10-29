@@ -96,9 +96,8 @@ O projeto foi organizado em pacotes, visando a extração de arquivos por contex
 
 #### Camada de Apresentação
 
-Optei por usar o conceitos do [BLoC Pattern](https://bloclibrary.dev/#/coreconcepts) na implementação da camada de apresentação. O BLoC Pattern é um padrão de gerenciamento de estado que utiliza Streams e Sink para a comunicação entre as camadas de apresentação e domínio.
+Para separar a lógica de apresentação da lógica de negócio, apliquei o conceito do [MVVM (Model-View-ViewModel)](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel) juntamente com a classe [ChangeNotifier](https://docs.flutter.dev/data-and-backend/state-mgmt/simple#changenotifier), que já está incluída no SDK do Flutter. A classe `ChangeNotifier` é uma implementação do padrão [Observer](https://pt.wikipedia.org/wiki/Observer) que permite que os Widgets sejam notificados sempre que o estado do objeto é alterado.
 
-Para a implementação do conceito `Cubit`, em vez de utilizar a biblioteca [bloc](https://pub.dev/packages/bloc), escolhi usar a classe [ChangeNotifier](https://docs.flutter.dev/data-and-backend/state-mgmt/simple#changenotifier), que já está incluída no SDK do Flutter. A classe `ChangeNotifier` é uma implementação do padrão [Observer](https://pt.wikipedia.org/wiki/Observer) que permite que os Widgets sejam notificados quando o estado do objeto muda.
 
 Além disso, utilizei a classe [ChangeNotifierProvider](https://docs.flutter.dev/data-and-backend/state-mgmt/simple#changenotifierprovider) da biblioteca [provider](https://pub.dev/packages/provider) para aplicar o conceito de [Inversão de Controle](https://en.wikipedia.org/wiki/Inversion_of_control) e [Injeção de Dependências](https://en.wikipedia.org/wiki/Dependency_injection) na minha aplicação.
 
