@@ -1,14 +1,18 @@
 {
   "name": "ds",
   "version": "1.0.0",
-  "description": "A sample command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit test in `test/`.",
-  "main": "index.js",
+  "description": "A DS application bridge to run style-dictionary from Dart script",
+  "main": "config.js",
   "directories": {
-    "lib": "lib"
+    "properties": "properties"
   },
   "author": "Pedro Silva",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "style-dictionary-generator": "file:generator"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0"
   }
 }
