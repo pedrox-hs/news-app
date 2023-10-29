@@ -1,0 +1,45 @@
+{
+  "text": {
+    "style": {
+      "heading_small": {
+        "value": {
+          "font-family": "{font.family.highlight}",
+          "font-size": "{font.size.lg}",
+          "font-weight": "{font.weight.bold}",
+          "height": "{line.height.distant}",
+          "color": "{neutral.color.1}"
+        },
+        "attributes": {
+          "category": "style",
+          "type": "text"
+        }
+      },
+      "subtitle_small": {
+        "value": {
+          "font-family": "{font.family.highlight}",
+          "font-size": "{font.size.md}",
+          "font-weight": "{font.weight.medium}",
+          "height": "{line.height.medium}",
+          "color": "{neutral.color.2}"
+        },
+        "attributes": {
+          "category": "style",
+          "type": "text"
+        }
+      },
+      "paragraph": {
+        "value": {
+          "font-family": "{font.family.highlight}",
+          "font-size": "{font.size.xs}",
+          "font-weight": "{font.weight.regular}",
+          "height": "{line.height.distant}",
+          "color": "{neutral.color.2}"
+        },
+        "attributes": {
+          "category": "style",
+          "type": "text"
+        }
+      }
+    }
+  }
+}
