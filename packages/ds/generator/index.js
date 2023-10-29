@@ -1,27 +1,9 @@
+const path = require('path')
 const StyleDictionary = require('style-dictionary')
-const definitions = require('./src')
+const { registerFromPlatformsPath } = require('./src/utils/registry')
 
-for (const platform in definitions) {
-  const templates = definitions[platform].templates
-  const transforms = definitions[platform].transforms
+const platformsPath = path.join(__dirname, 'src', 'platforms')
 
-  for (const name in templates) {
-    const formatter = templates[name]
-    StyleDictionary.registerFormat({ name, formatter })
-  }
-
-  for (const name in transforms) {
-    const transform = transforms[name]
-    StyleDictionary.registerTransform({ name, ...transform })
-  }
-
-  StyleDictionary.registerTransformGroup({
-    name: `meiuca-${platform}`,
-    transforms: [
-      'attribute/cti',
-      ...Object.getOwnPropertyNames(transforms),
-    ],
-  })
-}
+registerFromPlatformsPath(platformsPath)
 
 module.exports = StyleDictionary

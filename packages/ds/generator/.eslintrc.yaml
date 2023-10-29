@@ -1,0 +1,22 @@
+root: true
+extends:
+  - standard
+  # https://github.com/ota-meshi/eslint-plugin-lodash-template
+  - 'plugin:lodash-template/recommended'
+env:
+  commonjs: true
+  es2021: true
+  node: true
+parserOptions:
+  ecmaVersion: latest
+overrides:
+  - processor: 'lodash-template/base'
+    files:
+      - 'src/**/*.template'
+rules:
+  semi:
+    - warn
+    - never
+  comma-dangle:
+    - warn
+    - always-multiline
