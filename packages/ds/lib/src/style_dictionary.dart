@@ -81,7 +81,7 @@ class JDesignTokens {
       EdgeInsets.symmetric(vertical: 16.00, horizontal: 24.00);
   // endregion: SpacingSquish
 
-  // region: TextStyle
+  // region: Typography
   static const textStyleHeadingSmall = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 32.00,
@@ -103,5 +103,5 @@ class JDesignTokens {
     height: 1.50,
     color: Color(0xFFE4E5E7),
   );
-  // endregion: TextStyle
+  // endregion: Typography
 }

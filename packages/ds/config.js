@@ -33,9 +33,13 @@ module.exports = StyleDictionary.extend({
           },
         },
         {
-          destination: 'text_style.dart',
-          format: 'flutter/text_style.dart',
-          className: 'TextStyle',
+          destination: 'typography.dart',
+          format: 'flutter/factory.dart',
+          className: 'Typography',
+          factoryName: 'TextStyle',
+          imports: [
+            'package:flutter/painting.dart',
+          ],
           filter: {
             attributes: {
               type: 'text',
