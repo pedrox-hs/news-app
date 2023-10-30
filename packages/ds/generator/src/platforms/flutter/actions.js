@@ -11,7 +11,9 @@ module.exports = {
         additionalImports = [],
       } = config.options.flutterAggregate || {}
 
-      const allImports = [...additionalImports]
+      const allImports = [
+        ...additionalImports.map((line) => `import '${line}';`),
+      ]
       const aggregatedClassesFilePath = path.join(outputPath, destination)
       const files = fs.readdirSync(config.buildPath, { recursive: true })
 
@@ -28,10 +30,12 @@ module.exports = {
               switch (true) {
                 case line.trim().length === 0:
                   return false
-                case line.includes('static const'):
+                case line.includes('static '):
                   return true
-                case line.startsWith('import'):
-                  allImports.push(line)
+                case line.startsWith('import '):
+                  if (!allImports.includes(line)) {
+                    allImports.push(line)
+                  }
                   return false
                 case line.startsWith('class'):
                   className = line.split(' ')[1]
@@ -55,8 +59,7 @@ module.exports = {
 
       const newLines = [
         '// GENERATED CODE - DO NOT MODIFY BY HAND\n',
-        'import \'package:ds/src/types.dart\';',
-        'import \'package:flutter/painting.dart\';',
+        ...allImports,
         `class ${className} {`,
         `  ${className}._();`,
         ...allTokens,
