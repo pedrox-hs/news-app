@@ -1,9 +1,10 @@
 <%
 /* global context */
 const _camelCase = require('lodash/camelCase')
+const { formatNewDartObject } = require('@utils/template')
+
 const { file, dictionary: { allTokens }, formatHelpers: { fileHeader } } = context
 const { imports = [] } = file
-const { formatNewDartObject } = require('@utils/template')
 
 %>
 //
@@ -11,13 +12,13 @@ const { formatNewDartObject } = require('@utils/template')
 //
 <%= fileHeader({file, commentStyle: 'short'}) %>
 
-<%= imports.map(e => `import '${e}'`).join(';\n') %>
+<%= imports.map(e => `import '${e}';`).join('\n') %>
 
 class <%= file.className %> {
   <%= file.className %>._();
 
-    <%= allTokens.map((prop) => {
-        const attributes = prop.value;
-        return `    static const ${prop.name} = ${formatNewDartObject(file.factoryName, attributes)}`;
-    }).join('\n') %>
+<%= allTokens.map((prop) => {
+  const attributes = prop.value;
+  return `  static final ${prop.name} = ${formatNewDartObject(file.factoryName, attributes)};`;
+}).join('\n') %>
 }

@@ -21,10 +21,10 @@ module.exports = {
     transformer: ({ value }) => `FontWeight.w${value}`,
   },
 
-  'size/flutter/rem': {
+  'size/flutter/remToDouble': {
     type: 'value',
-    matcher: ({ value, attributes: { category } }) =>
-      category === 'size' && value.match(/rem$/),
+    matcher: ({ value, attributes: { type, category } }) =>
+      category === 'size' && type === 'font' && value.match(/^\d+(rem)?$/),
     transformer: ({ value }, options) => {
       const baseFont = getBasePxFontSize(options)
       return (parseFloat(value, 10) * baseFont).toFixed(2)
@@ -33,15 +33,15 @@ module.exports = {
 
   'size/flutter/px2double': {
     type: 'value',
-    matcher: ({ value, attributes: { category, type } }) =>
-      category === 'size' && type !== 'radius' && value.split(' ').length === 1,
+    matcher: ({ value, attributes: { category } }) =>
+      category === 'size' && value.match(/^\d+(px)?$/),
     transformer: ({ value }) => parseFloat(value, 10).toFixed(2),
   },
 
   'size/flutter/shadow': {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
-      category === 'size' && type === 'shadow' && value.split(' ').length === 3,
+      category === 'size' && type === 'shadow' && value.match(/^\d+(px)? \d+(px)? \d+(px)?$/),
     transformer: ({ value }) => {
       const [offsetX, offsetY, blurRadius] = value.split(' ')
         .map(value => parseFloat(value, 10).toFixed(2))
@@ -49,7 +49,7 @@ module.exports = {
     },
   },
 
-  'size/flutter/edgeinsets/only/bottom': {
+  'size/flutter/spacing/bottom': {
     type: 'value',
     matcher: ({ attributes: { category, type } }) =>
       category === 'size' && type === 'spacing',
@@ -59,10 +59,10 @@ module.exports = {
     },
   },
 
-  'size/flutter/edgeinsets/symmetric': {
+  'size/flutter/spacing/symmetric': {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
-      category === 'size' && type.startsWith('spacing_') && value.split(' ').length === 2,
+      category === 'size' && type.startsWith('spacing_') && value.match(/^\d+(px)? \d+(px)?$/),
     transformer: ({ value }) => {
       const [vertical, horizontal] = value.split(' ')
         .map(value => parseFloat(value, 10).toFixed(2))
@@ -70,10 +70,10 @@ module.exports = {
     },
   },
 
-  'size/flutter/edgeinsets/all': {
+  'size/flutter/spacing/all': {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
-      category === 'size' && type.startsWith('spacing_') && value.split(' ').length === 1,
+      category === 'size' && type.startsWith('spacing_') && value.match(/^\d+(px)?$/),
     transformer: token => {
       const value = parseFloat(token.value, 10).toFixed(2)
       return `EdgeInsets.all(${value})`
@@ -82,15 +82,28 @@ module.exports = {
 
   'size/flutter/radius': {
     type: 'value',
-    matcher: ({ value, attributes: { type } }) =>
-      type === 'radius' &&
-      value.split(' ').length === 1 &&
-      // currently Flutter does not support percentage radius
-      // issue: https://github.com/flutter/flutter/issues/135689
-      !value.includes('%'),
+    matcher: ({ value, attributes: { type, category } }) =>
+      (type === 'radius' || category === 'radius') && value.match(/^\d+(px)?$/),
     transformer: token => {
       const value = parseFloat(token.value, 10)
       return `BorderRadius.all(Radius.circular(${value.toFixed(2)}))`
     },
+  },
+
+  'size/flutter/asset': {
+    type: 'value',
+    matcher: ({ attributes: { type, category } }) =>
+      category === 'size' && type === 'asset',
+    transformer: ({ value }) => {
+      const [width, height] = value.split(' ')
+        .map(value => parseFloat(value, 10).toFixed(2))
+      return `Size(${width}, ${height || width})`
+    },
+  },
+
+  'asset/flutter/path': {
+    type: 'value',
+    matcher: ({ value }) => typeof value === 'string' && value.startsWith('assets://'),
+    transformer: ({ value }) => `'${value}'`,
   },
 }

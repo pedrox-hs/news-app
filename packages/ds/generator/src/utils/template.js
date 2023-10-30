@@ -2,8 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const formatHelpers = require('style-dictionary/lib/common/formatHelpers')
 const _template = require('lodash/template')
-const _camelCase = require('lodash/camelCase')
-const _isPlainObject = require('lodash/isPlainObject')
+const { camelCase, isPlainObject, upperFirst } = require('lodash')
 
 function formatsFromTemplatesPath (platform, templatesPath) {
   const templates = fs.readdirSync(templatesPath)
@@ -16,12 +15,12 @@ function formatsFromTemplatesPath (platform, templatesPath) {
     return {
       ...acc,
       [name]: {
-        formatter: (dictionary, config, file) => {
+        formatter: (dictionary, options, file) => {
           const content = fs.readFileSync(templatePath)
           const template = _template(content)
           return template({
             require,
-            context: { file, config, dictionary, formatHelpers },
+            context: { file, options, dictionary, formatHelpers },
           })
         },
       },
@@ -30,15 +29,22 @@ function formatsFromTemplatesPath (platform, templatesPath) {
 }
 
 function formatNewDartObject (classOrFactory, attributes) {
+  classOrFactory = classOrFactory.split('.', 2).map((part, index) => {
+    if (index === 0) {
+      return upperFirst(camelCase(part))
+    }
+    return part
+  }).join('.')
+
   const factoryArgs = Object.entries(attributes)
     .reduce((acc, [name, value]) => {
-      if (_isPlainObject(value)) {
+      if (isPlainObject(value)) {
         value = formatNewDartObject(name, value)
       }
-      return `${acc}${_camelCase(name)}: ${value},`
+      return `${acc}${camelCase(name)}: ${value},`
     }, '')
 
-  return `${classOrFactory}(${factoryArgs});`
+  return `${classOrFactory}(${factoryArgs})`
 }
 
 module.exports = {
