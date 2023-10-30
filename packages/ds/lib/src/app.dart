@@ -3,12 +3,11 @@ library ds;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'tokens/color.dart';
-import 'tokens/typography.dart';
+import 'theme.dart';
 
 class App extends StatelessWidget {
   const App({
-    Key? key,
+    super.key,
     this.title = '',
     required this.home,
     this.debugShowCheckedModeBanner = kDebugMode,
@@ -20,14 +19,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return MaterialApp(
       title: title,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColor.brandPrimary01),
-        useMaterial3: false,
-        textTheme: theme.textTheme.apply(fontFamily: AppFontFamily.highlight),
-      ),
+      themeMode: ThemeMode.system,
+      theme: AppTheme.light(context),
+      darkTheme: AppTheme.dark(context),
       home: home,
       debugShowCheckedModeBanner: false,
     );

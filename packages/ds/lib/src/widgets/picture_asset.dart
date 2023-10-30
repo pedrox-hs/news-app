@@ -18,8 +18,7 @@ class PictureAssetWidget extends StatelessWidget {
     switch (asset.type) {
       case PictureAssetType.localSvg:
         return SvgPicture.asset(
-          asset.path,
-          package: 'ds',
+          asset.uri,
           width: size?.width,
           height: size?.height,
           semanticsLabel: asset.semanticsLabel,

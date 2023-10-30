@@ -6,23 +6,23 @@ abstract class Asset extends Equatable {
 
 abstract class PictureAsset extends Asset {
   const PictureAsset(
-    this.path, {
+    this.uri, {
     this.semanticsLabel,
     required this.type,
   });
 
-  final String path;
+  final String uri;
   final String? semanticsLabel;
 
   final PictureAssetType type;
 
   @override
-  List<Object?> get props => [path, semanticsLabel, type];
+  List<Object?> get props => [uri, semanticsLabel, type];
 }
 
 class LocalSvgAsset extends PictureAsset {
   const LocalSvgAsset(
-    super.path, {
+    super.uri, {
     super.semanticsLabel,
   }) : super(type: PictureAssetType.localSvg);
 }

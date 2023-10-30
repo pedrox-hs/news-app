@@ -48,7 +48,7 @@ class ErrorData extends Equatable {
 class GenericErrorData extends ErrorData {
   const GenericErrorData()
       : super(
-          icon: const LocalSvgAsset(AppAsset.illustrationError),
+          icon: JDesignTokens.assetIllustrationError,
           title: 'Ops!',
           description: 'Não foi possível carregar as notícias.',
           buttonText: 'Tentar novamente',

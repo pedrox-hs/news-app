@@ -1,17 +1,17 @@
-import 'package:flutter/painting.dart';
+import 'package:flutter/material.dart';
 
-class ShapeData {
-  const ShapeData({
-    required this.padding,
+class ShapeStyleData {
+  const ShapeStyleData({
     required this.borderRadius,
-    required this.borderWidth,
-    required this.borderColor,
-    required this.backgroundColor,
+    this.padding,
+    this.borderWidth = 1,
+    this.borderColor = Colors.transparent,
+    this.backgroundColor,
   });
 
-  final EdgeInsetsGeometry padding;
   final BorderRadius borderRadius;
+  final EdgeInsetsGeometry? padding;
   final double borderWidth;
   final Color borderColor;
-  final Color backgroundColor;
+  final Color? backgroundColor;
 }

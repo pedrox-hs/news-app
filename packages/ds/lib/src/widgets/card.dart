@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/dimen.dart';
-import '../tokens/shape.dart';
-import '../tokens/typography.dart';
+import '../style_dictionary.dart';
 import 'button.dart';
 import 'shape.dart';
 
@@ -23,7 +21,7 @@ class CardContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shape(
-      shape: AppShape.defaults,
+      style: JDesignTokens.shapeBox1,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -62,8 +60,8 @@ class Heading extends Typography {
     super.text, {
     super.key,
   }) : super(
-          style: AppTextStyle.headingSmall,
-          margin: EdgeInsets.only(bottom: AppSpacingStack.xxxs),
+          style: JDesignTokens.textStyleHeadingSmall,
+          margin: JDesignTokens.spacingSizeXxxs,
           maxLines: 2,
         );
 }
@@ -73,8 +71,8 @@ class Subtitle extends Typography {
     super.text, {
     super.key,
   }) : super(
-          style: AppTextStyle.subtitleSmall,
-          margin: EdgeInsets.only(bottom: AppSpacingStack.xxs),
+          style: JDesignTokens.textStyleSubtitleSmall,
+          margin: JDesignTokens.spacingSizeXxs,
           maxLines: 3,
         );
 }
@@ -84,8 +82,8 @@ class Paragraph extends Typography {
     super.text, {
     super.key,
   }) : super(
-          style: AppTextStyle.paragraph,
+          style: JDesignTokens.textStyleParagraph,
           maxLines: 10,
-          margin: EdgeInsets.only(bottom: AppSpacingStack.sm),
+          margin: JDesignTokens.spacingSizeSm,
         );
 }

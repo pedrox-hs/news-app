@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/button.dart';
+import '../style_dictionary.dart';
 
 class Button extends StatelessWidget {
   const Button._({
@@ -18,7 +18,7 @@ class Button extends StatelessWidget {
       Button._(
         key: key,
         text: text,
-        style: AppButtonStyle.primary,
+        style: JDesignTokens.buttonStylePrimary,
         onPressed: onPressed,
       );
 
@@ -30,8 +30,8 @@ class Button extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPressed,
-      child: Text(text),
       style: style,
+      child: Text(text),
     );
   }
 }

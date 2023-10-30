@@ -1,7 +1,7 @@
 import 'package:flutter/painting.dart';
 
 class PercentageBorderRadius extends BorderRadius {
-  const PercentageBorderRadius.all(Radius radius) : super.all(radius);
+  const PercentageBorderRadius.all(super.radius) : super.all();
 
   @override
   RRect toRRect(Rect rect) {

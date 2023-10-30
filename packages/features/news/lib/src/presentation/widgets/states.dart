@@ -50,7 +50,7 @@ class _LoadedStateWidget extends StatelessWidget {
     return ListView.builder(
       controller: scrollController,
       itemCount: articles.length,
-      padding: AppSpacingSquish.quarck,
+      padding: JDesignTokens.spacingSquishSizeQuarck,
       itemBuilder: (_, index) => ArticleWidget(
         articles[index],
         onReadMorePressed: (article) {

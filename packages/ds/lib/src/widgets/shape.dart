@@ -4,26 +4,26 @@ import '../types/shape.dart';
 
 class Shape extends StatelessWidget {
   const Shape({
-    required this.shape,
     required this.child,
+    required this.style,
     super.key,
   });
 
-  final ShapeData shape;
+  final ShapeStyleData style;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: shape.borderRadius,
+        borderRadius: style.borderRadius,
         border: Border.all(
-          width: shape.borderWidth,
-          color: shape.borderColor,
+          width: style.borderWidth,
+          color: style.borderColor,
         ),
-        color: shape.backgroundColor,
+        color: style.backgroundColor,
       ),
-      padding: shape.padding,
+      padding: style.padding,
       child: child,
     );
   }

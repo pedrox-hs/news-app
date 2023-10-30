@@ -8,7 +8,7 @@ class ButtonStyleData extends ButtonStyle {
     Color? overlayColor,
     TextStyle? textStyle,
     EdgeInsetsGeometry? padding,
-    OutlinedBorder? shape,
+    BorderRadius? borderRadius,
   }) : super(
           textStyle: MaterialStatePropertyAll<TextStyle?>(textStyle),
           backgroundColor:
@@ -16,7 +16,11 @@ class ButtonStyleData extends ButtonStyle {
           overlayColor:
               overlayColor != null ? _ButtonOverlayColor(overlayColor) : null,
           padding: ButtonStyleButton.allOrNull<EdgeInsetsGeometry>(padding),
-          shape: ButtonStyleButton.allOrNull<OutlinedBorder>(shape),
+          shape: ButtonStyleButton.allOrNull<OutlinedBorder>(
+            borderRadius != null
+                ? RoundedRectangleBorder(borderRadius: borderRadius)
+                : null,
+          ),
         );
 }
 

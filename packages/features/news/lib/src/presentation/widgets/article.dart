@@ -19,7 +19,7 @@ class ArticleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: AppSpacingInset.nano,
+      padding: JDesignTokens.spacingInsetSizeNano,
       child: CardContent(
         title: article.title,
         subtitle: article.subtitle,
