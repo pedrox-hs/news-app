@@ -49,14 +49,34 @@ module.exports = {
     },
   },
 
-  'size/flutter/spacing/squish': {
+  'size/flutter/edgeinsets/only/bottom': {
+    type: 'value',
+    matcher: ({ attributes: { category, type } }) =>
+      category === 'size' && type === 'spacing',
+    transformer: token => {
+      const value = parseFloat(token.value, 10).toFixed(2)
+      return `EdgeInsets.only(bottom: ${value})`
+    },
+  },
+
+  'size/flutter/edgeinsets/symmetric': {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
-      category === 'size' && type === 'spacing_squish' && value.split(' ').length === 2,
+      category === 'size' && type.startsWith('spacing_') && value.split(' ').length === 2,
     transformer: ({ value }) => {
       const [vertical, horizontal] = value.split(' ')
         .map(value => parseFloat(value, 10).toFixed(2))
       return `EdgeInsets.symmetric(vertical: ${vertical}, horizontal: ${horizontal})`
+    },
+  },
+
+  'size/flutter/edgeinsets/all': {
+    type: 'value',
+    matcher: ({ value, attributes: { category, type } }) =>
+      category === 'size' && type.startsWith('spacing_') && value.split(' ').length === 1,
+    transformer: token => {
+      const value = parseFloat(token.value, 10).toFixed(2)
+      return `EdgeInsets.all(${value})`
     },
   },
 

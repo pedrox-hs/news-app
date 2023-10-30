@@ -70,21 +70,8 @@ module.exports = StyleDictionary.extend({
           destination: 'spacing.dart',
           format: 'flutter/class.dart',
           className: 'Spacing',
-          filter: {
-            attributes: {
-              type: 'spacing',
-            },
-          },
-        },
-        {
-          destination: 'spacing_squish.dart',
-          format: 'flutter/class.dart',
-          className: 'SpacingSquish',
-          filter: {
-            attributes: {
-              type: 'spacing_squish',
-              subitem: 'stack',
-            },
+          filter: ({ attributes: { type, subitem } }) => {
+            return type.startsWith('spacing') && (type !== 'spacing_squish' || subitem === 'stack')
           },
         },
         {
