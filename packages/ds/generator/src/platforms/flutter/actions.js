@@ -58,6 +58,7 @@ module.exports = {
         'import \'package:ds/src/types.dart\';',
         'import \'package:flutter/painting.dart\';',
         `class ${className} {`,
+        `  ${className}._();`,
         ...allTokens,
         '}\n',
       ]
