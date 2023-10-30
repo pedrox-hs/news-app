@@ -1,0 +1,34 @@
+{
+  "button": {
+    "style": {
+      "primary": {
+        "value": {
+          "text-style": "{button.text_style.primary}",
+          "background-color": "{brand.color.primary.3}",
+          "overlay-color": "{brand.color.primary.2}",
+          "padding": "{spacing_squish.size.xs.stack}",
+          "border-radius": "{border.radius.none}"
+        },
+        "attributes": {
+          "type": "button",
+          "category": "style"
+        }
+      }
+    },
+    "text_style": {
+      "primary": {
+        "value": {
+          "font-family": "{font.family.highlight}",
+          "font-size": "{font.size.sm}",
+          "font-weight": "{font.weight.medium}",
+          "height": "{line.height.tight}",
+          "color": "{neutral.color.5}"
+        },
+        "attributes": {
+          "type": "button",
+          "category": "text_style"
+        }
+      }
+    }
+  }
+}

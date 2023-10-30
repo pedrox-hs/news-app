@@ -1,0 +1,19 @@
+{
+  "shape": {
+    "box": {
+      "1": {
+        "value": {
+          "padding": "{spacing_inset.size.lg}",
+          "border-radius": "{radius.size.none}",
+          "border-width": "{border.size.thin}",
+          "border-color": "{neutral.color.4}",
+          "background-color": "{neutral.color.5}"
+        },
+        "attributes": {
+          "type": "shape",
+          "category": "box"
+        }
+      }
+    }
+  }
+}

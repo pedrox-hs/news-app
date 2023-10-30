@@ -1,0 +1,22 @@
+{
+  "asset": {
+    "size": {
+      "lg": {
+        "value": "96px",
+        "attributes": {
+          "type": "asset",
+          "category": "size"
+        }
+      }
+    },
+    "illustration": {
+      "error": {
+        "value": "assets://illustrations/generic_error.svg",
+        "attributes": {
+          "type": "asset",
+          "category": "illustration"
+        }
+      }
+    }
+  }
+}

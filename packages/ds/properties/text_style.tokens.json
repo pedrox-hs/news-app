@@ -10,8 +10,8 @@
           "color": "{neutral.color.1}"
         },
         "attributes": {
-          "category": "style",
-          "type": "text"
+          "type": "text",
+          "category": "style"
         }
       },
       "subtitle_small": {
@@ -23,8 +23,8 @@
           "color": "{neutral.color.2}"
         },
         "attributes": {
-          "category": "style",
-          "type": "text"
+          "type": "text",
+          "category": "style"
         }
       },
       "paragraph": {
@@ -36,8 +36,8 @@
           "color": "{neutral.color.2}"
         },
         "attributes": {
-          "category": "style",
-          "type": "text"
+          "type": "text",
+          "category": "style"
         }
       }
     }

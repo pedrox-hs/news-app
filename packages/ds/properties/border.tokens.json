@@ -1,0 +1,13 @@
+{
+  "border": {
+    "radius": {
+      "none": {
+        "value": "0px",
+        "attributes": {
+          "type": "border",
+          "category": "radius"
+        }
+      }
+    }
+  }
+}

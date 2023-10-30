@@ -1,0 +1,48 @@
+{
+  "spacing_inset": {
+    "size": {
+      "quarck": {
+        "value": "4px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      },
+      "nano": {
+        "value": "8px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      },
+      "xs": {
+        "value": "16px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      },
+      "sm": {
+        "value": "24px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      },
+      "md": {
+        "value": "32px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      },
+      "lg": {
+        "value": "40px",
+        "attributes": {
+          "category": "size",
+          "type": "spacing_inset"
+        }
+      }
+    }
+  }
+}
