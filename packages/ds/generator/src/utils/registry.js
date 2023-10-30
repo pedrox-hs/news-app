@@ -12,14 +12,15 @@ const registers = [
 const isScript = path => fs.existsSync(`${path}.js`)
 const isDirectory = path => fs.lstatSync(path).isDirectory()
 
-const registerFromPlatformsPath = platformsPath =>
+function registerFromPlatformsPath (platformsPath) {
   fs.readdirSync(platformsPath)
     .filter(platform => isDirectory(path.join(platformsPath, platform)))
     .forEach(platform => {
       registerFromDefinitionsPath(path.join(platformsPath, platform))
     })
+}
 
-const registerFromDefinitionsPath = definitionsPath => {
+function registerFromDefinitionsPath (definitionsPath) {
   for (const [key, register] of registers) {
     const registryPath = path.join(definitionsPath, key)
 
