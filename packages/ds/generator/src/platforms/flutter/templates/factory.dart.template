@@ -3,6 +3,7 @@
 const _camelCase = require('lodash/camelCase')
 const { file, dictionary: { allTokens }, formatHelpers: { fileHeader } } = context
 const { imports = [] } = file
+const { formatNewDartObject } = require('@utils/template')
 
 %>
 //
@@ -15,13 +16,8 @@ const { imports = [] } = file
 class <%= file.className %> {
   <%= file.className %>._();
 
-    <%= allTokens.map(function(prop) {
+    <%= allTokens.map((prop) => {
         const attributes = prop.value;
-        const factoryArgs = Object.entries(attributes)
-            .reduce((acc, [name, value]) => {
-                return `${acc}${_camelCase(name)}: ${value},`;
-            }, '');
-
-        return `    static const ${prop.name} = ${file.factoryName}(${factoryArgs});`;
+        return `    static const ${prop.name} = ${formatNewDartObject(file.factoryName, attributes)}`;
     }).join('\n') %>
 }
