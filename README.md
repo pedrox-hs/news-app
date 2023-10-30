@@ -47,8 +47,7 @@ Aqui está o resultado final do código gerado: [packages/ds/lib/src/style_dicti
 
 O componente `CardContent` é um componente que exibe o conteúdo de uma notícia. O componente é composto por um título, uma descrição, uma breve descrição e um botão para abrir a notícia no navegador.
 
-<img src="assets/screenshots/card_content.png" alt="CardContent" width="280" />
-<img src="assets/screenshots/card_content_lines.png" alt="CardContent com linhas de marcação" width="280" />
+<img src="assets/screenshots/card_content.png" alt="CardContent" width="280" /> <img src="assets/screenshots/card_content_lines.png" alt="CardContent com linhas de marcação" width="280" />
 
 ### Telas
 
@@ -83,6 +82,7 @@ O aplicativo foi desenvolvido utilizando a arquitetura baseada em [Clean Archite
 
 O projeto foi organizado em pacotes, visando a extração de arquivos por contexto, de modo a permitir a reutilização de componentes em diferentes partes da aplicação. A estrutura do projeto pode ser descrita da seguinte forma:
 
+- `lib`: Este diretório contém o código-fonte do aplicativo.
 - `packages/core`: Este pacote contém abstrações e utilitários que geralmente são compartilhados por outros pacotes. Dentro dele, encontramos:
     - `packages/core/network`: Abstrações e utilitários relacionados à comunicação com a rede.
     - `packages/core/navigation`: Abstrações que facilitam a navegação entre telas.
@@ -111,7 +111,10 @@ Além disso, utilizei a classe [ChangeNotifierProvider](https://docs.flutter.dev
 - [freezed](https://pub.dev/packages/freezed): Utilizada para gerar classes imutáveis, facilitando a implementação do conceito de [Value Object](https://martinfowler.com/bliki/ValueObject.html).
 - [http](https://pub.dev/packages/http): Utilizada para fazer requisições HTTP.
 - [provider](https://pub.dev/packages/provider): Utilizada para injeção de dependências e inversão de controle.
-- [url_launcher](https://pub.dev/packages/url_launcher): Utilizada para abrir URLs.
+- [url_launcher](https://pub.dev/packages/url_launcher): Utilizada para abrir URLs;
+- [mocktail](https://pub.dev/packages/mocktail): Mocks de funções e classes para testes unitários;
+- [golden_toolkit](https://pub.dev/packages/golden_toolkit): Golden tests;
+- [alchemist](https://pub.dev/packages/alchemist): Facilita a criação de golden tests.
 
 
 ## Instalação a partir do código-fonte
@@ -220,16 +223,6 @@ Ou acesse a pasta de cada pacote individualmente e execute o comando `flutter te
 - `packages/core/network`
 - `packages/features/news`
 
-### Bibliotecas Utilizadas para Testes
-
-As principais bibliotecas utilizadas para a implementação dos testes são:
-
-- [mocktail](https://pub.dev/packages/mocktail): Mocks;
-- [test](https://pub.dev/packages/test): Testes unitários;
-- [flutter_test](https://pub.dev/packages/flutter_test): Testes de Widgets;
-- [golden_toolkit](https://pub.dev/packages/golden_toolkit): Golden tests;
-- [alchemist](https://pub.dev/packages/alchemist): Facilita a criação de golden tests.
-
 
 ## Próximos Passos
 
@@ -243,6 +236,7 @@ Possíveis evoluções para o projeto:
 - [x] **Automatizar a Geração de Código a partir do Arquivo de Design Tokens:** Com tempo hábil e alinhamento com o time de design e outros desenvolvedores, seria possível automatizar a geração de código a partir do arquivo exportado pelo Figma, utilizando o `style-dictionary` em uma biblioteca própria para o Flutter;
 - [ ] **Aprimorar Gerador de StyleDictionary:** Aprimorar o gerador de código para que seja possível utilizar referências entre tokens, como `$spacing-1: $spacing-2`;
 - [ ] **Dark Mode:** Implementar o dark mode;
+- [ ] **Internacionalização:** Internacionalizar o aplicativo, substituindo as strings hardcoded por chaves;
 - [x] **Design Tokens de Componentes:** Criar um arquivo de Design Tokens específico para o estilo dos componentes, utilizando a sintaxe do `style-dictionary` para facilitar a geração de código;
 - [ ] **Galeria do DS:** Criar uma galeria com todos os componentes do DS, para facilitar a visualização e testes dos componentes, que pode ser automatizada;
 - [ ] **CI/CD:** Configurar o CI/CD para executar os testes, análise estática e gerar os artefatos de compilação para as plataformas suportadas, inclusive publicando-os em suas respectivas lojas e no GitHub Pages;
@@ -252,5 +246,5 @@ Possíveis evoluções para o projeto:
 
 <!--
 Para eventuais consultas e dar transparência:
-Link da conversa para a correção ortográfica feita pelo Chato Gepeto: https://chat.openai.com/share/bf0c5f88-cd42-4f85-8937-1968ae391d70
+Link da conversa para a revisão feita pelo Chato Gepeto: https://chat.openai.com/share/bf0c5f88-cd42-4f85-8937-1968ae391d70
 -->
