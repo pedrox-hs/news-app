@@ -5,10 +5,10 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 
 class GoldenTestApp extends StatelessWidget {
   const GoldenTestApp({
-    Key? key,
+    super.key,
     this.device = Device.iphone11,
     required this.builder,
-  }) : super(key: key);
+  });
 
   final Device device;
   final ValueGetter<Widget> builder;

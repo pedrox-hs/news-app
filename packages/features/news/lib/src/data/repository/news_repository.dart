@@ -1,7 +1,6 @@
-import 'package:news_feature/src/data/datasource/news_remote_datasource.dart';
-
 import '../../domain/entity/article.dart';
 import '../../domain/repository/news_repository.dart';
+import '../datasource/news_remote_datasource.dart';
 
 class NewsRepository extends INewsRepository {
   NewsRepository({

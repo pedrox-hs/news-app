@@ -4,7 +4,7 @@ import 'package:http/http.dart';
 import 'package:http/testing.dart' as http;
 
 class MockHttpClient extends http.MockClient {
-  MockHttpClient._(this.handler) : super(handler);
+  MockHttpClient._(this.handler) : super(handler.call);
 
   factory MockHttpClient() => MockHttpClient._(RequestHandler());
 

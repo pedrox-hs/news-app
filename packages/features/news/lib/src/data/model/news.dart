@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'package:news_feature/src/data/model/article.dart';
 
 import '../../domain/entity/article.dart';
+import 'article.dart';
 
 class NewsResultModel extends Equatable {
   final List<Article> articles;

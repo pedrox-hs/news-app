@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:commons_foundation/foundation.dart';
 import 'package:ds/ds.dart';
 import 'package:flutter/material.dart';
-import 'package:news_feature/src/presentation/news_state.dart';
 import 'package:provider/provider.dart';
 
 import '../domain/entity/article.dart';
+import 'news_state.dart';
 import 'news_view_model.dart';
 import 'widgets/article.dart';
 
