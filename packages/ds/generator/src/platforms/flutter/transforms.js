@@ -1,4 +1,4 @@
-const { getBasePxFontSize } = require('../../utils/adapters')
+const { getBasePxFontSize } = require('@utils/adapters')
 
 module.exports = {
   'name/flutter/stack': {

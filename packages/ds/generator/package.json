@@ -1,18 +1,22 @@
 {
   "name": "style-dictionary-generator",
   "version": "1.0.0",
+  "author": "Pedro Silva",
+  "license": "MIT",
   "description": "A sample command-line application with an entrypoint in `bin/`, library code in `lib/`, and example unit test in `test/`.",
   "main": "index.js",
   "directories": {
     "src": "src"
   },
-  "author": "Pedro Silva",
-  "license": "MIT",
+  "_moduleAliases": {
+    "@utils": "src/utils"
+  },
   "scripts": {
     "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "lodash": "^4.17.21",
+    "module-alias": "^2.2.3",
     "style-dictionary": "^3.9.0"
   },
   "devDependencies": {
