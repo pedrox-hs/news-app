@@ -4,7 +4,6 @@ module.exports = {
       'attribute/cti',
       'name/cti/camel',
       'name/flutter/stack',
-      'text/flutter/style',
       'color/hex8flutter',
       'size/flutter/rem',
       'content/flutter/literal',

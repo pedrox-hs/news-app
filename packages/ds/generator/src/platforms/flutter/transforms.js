@@ -1,48 +1,49 @@
-const _camelCase = require('lodash/camelCase')
 const { getBasePxFontSize } = require('../../utils/adapters')
 
 module.exports = {
   'name/flutter/stack': {
     type: 'name',
-    matcher: token => token.name.endsWith('Stack'),
-    transformer: token => token.name.replace(/[Ss]tack$/, ''),
+    matcher: ({ name }) => name.endsWith('Stack'),
+    transformer: ({ name }) => name.replace(/[Ss]tack$/, ''),
   },
 
   'size/flutter/height': {
     type: 'value',
-    matcher: token => token.attributes.category === 'height',
-    transformer: token => (parseFloat(token.value, 10) / 100).toFixed(2),
+    matcher: ({ attributes: { category } }) =>
+      category === 'height',
+    transformer: ({ value }) => (parseFloat(value, 10) / 100).toFixed(2),
   },
 
   'font/flutter/weight': {
     type: 'value',
-    matcher: token => token.attributes.type === 'font' && token.attributes.category === 'weight',
-    transformer: token => `FontWeight.w${token.value}`,
+    matcher: ({ attributes: { category, type } }) =>
+      type === 'font' && category === 'weight',
+    transformer: ({ value }) => `FontWeight.w${value}`,
   },
 
   'size/flutter/rem': {
     type: 'value',
-    matcher: token => token.attributes.category === 'size' && token.value.match(/rem$/),
-    transformer: (token, options) => {
+    matcher: ({ value, attributes: { category } }) =>
+      category === 'size' && value.match(/rem$/),
+    transformer: ({ value }, options) => {
       const baseFont = getBasePxFontSize(options)
-      return (parseFloat(token.value, 10) * baseFont).toFixed(2)
+      return (parseFloat(value, 10) * baseFont).toFixed(2)
     },
   },
 
   'size/flutter/px2double': {
     type: 'value',
-    matcher: token => {
-      return token.attributes.category === 'size' && token.attributes.type !== 'radius' && token.value.split(' ').length === 1
-    },
-    transformer: token => parseFloat(token.value, 10).toFixed(2),
+    matcher: ({ value, attributes: { category, type } }) =>
+      category === 'size' && type !== 'radius' && value.split(' ').length === 1,
+    transformer: ({ value }) => parseFloat(value, 10).toFixed(2),
   },
 
   'size/flutter/shadow': {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
       category === 'size' && type === 'shadow' && value.split(' ').length === 3,
-    transformer: token => {
-      const [offsetX, offsetY, blurRadius] = token.value.split(' ')
+    transformer: ({ value }) => {
+      const [offsetX, offsetY, blurRadius] = value.split(' ')
         .map(value => parseFloat(value, 10).toFixed(2))
       return `Shadow(blurRadius: ${blurRadius}, offset: Offset(${offsetX}, ${offsetY}))`
     },
@@ -52,8 +53,8 @@ module.exports = {
     type: 'value',
     matcher: ({ value, attributes: { category, type } }) =>
       category === 'size' && type === 'spacing_squish' && value.split(' ').length === 2,
-    transformer: token => {
-      const [vertical, horizontal] = token.value.split(' ')
+    transformer: ({ value }) => {
+      const [vertical, horizontal] = value.split(' ')
         .map(value => parseFloat(value, 10).toFixed(2))
       return `EdgeInsets.symmetric(vertical: ${vertical}, horizontal: ${horizontal})`
     },
@@ -70,24 +71,6 @@ module.exports = {
     transformer: token => {
       const value = parseFloat(token.value, 10)
       return `BorderRadius.all(Radius.circular(${value.toFixed(2)}))`
-    },
-  },
-
-  'text/flutter/style': {
-    type: 'value',
-    matcher: ({ attributes: { category, type } }) =>
-      type === 'text' && category === 'style',
-    transformer: token => {
-      const textStyleData = token.value
-      const textStyleDataCamelCase = textStyleData.split(';')
-        .reduce(
-          (acc, cur) => {
-            const [key, value] = cur.split(':')
-            return `${acc}${_camelCase(key)}: ${value},`
-          },
-          '',
-        )
-      return `TextStyle(${textStyleDataCamelCase})`
     },
   },
 }
