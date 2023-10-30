@@ -7,10 +7,10 @@ help: ## Mostra todos os comandos disponíveis com uma breve descrição
 setup: ## Cria o arquivo .env e instala as dependências
 	[ -f .env ] || cp .env.example .env
 	find . -maxdepth $(find_packages_depth) -type f -name pubspec.yaml -execdir flutter pub get \;
-# npm --prefix packages/ds install
+	npm --prefix packages/ds install
 
 
-ds: # [WIP] Build Style Dictionary for flutter
+ds: ## Cria/atualiza os dicionários de estilo a partir dos arquivos de Design Tokens
 	dart run ds:main build
 	dart fix --apply packages/ds/lib
 	dart format packages/ds/lib

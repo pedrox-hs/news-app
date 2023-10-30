@@ -16,27 +16,30 @@ Busquei manter a arquitetura o mais independente possível de bibliotecas extern
 
 > A Folha de Design Tokens é um arquivo JSON que contém informações de cores, tipografia, espaçamento e outros valores utilizados para a criação dos componentes do Design System.
 
-Atualmente, a Amazon mantém um projeto open-source chamado [style-dictionary](https://amzn.github.io/style-dictionary/#/) que permite a geração de código a partir de um arquivo de Design Tokens, simplificando seu uso para diversos frameworks e linguagens.
+Atualmente, a Amazon mantém um projeto open-source chamado [style-dictionary](https://amzn.github.io/style-dictionary#/), que permite a geração de código a partir de um arquivo de Design Tokens, simplificando seu uso para diversos frameworks e linguagens.
 
-Realizei alguns testes utilizando o `style-dictionary` para gerar código para o Flutter, mas o suporte para ele ainda é limitado, o que inviabiliza a geração automática de código para os componentes de forma satisfatória.
+Realizei alguns testes utilizando o `style-dictionary` para gerar código para o Flutter, mas o suporte para ele ainda é limitado, o que dificultou bastante sua utilização, necessitando de diversas configurações.
 
 #### Alguns dos problemas encontrados foram:
 
 - Não transforma porcentagens em valores literais, como `$border-radius-*` e `$line-height-*`;
 - Suporta apenas tipos primitivos e alguns do pacote `dart:ui`, não incluindo `EdgeInsets` e `BorderRadius`.
-- Muitas colisões de tokens na categoria `size`;
-- Impossibilidade de utilizar filtros para gerar tokens específicos em um mesmo arquivo, como seria o caso para os `$spacing-*` (issue https://github.com/amzn/style-dictionary/issues/965);
-- Conversão de valores do tipo `size` de maneira confusa, cada pixel é multiplicado por 16.
+- Reporta muitas colisões de tokens na categoria `size` quando gerado em um único arquivo;
+- A conversão de valores do tipo `size` é feita de maneira errônea, considerando todos como se fossem `rem`, mesmo que alguns sejam `px`, exigindo uma configuração pouco documentada para corrigir isso.
 
-Foi avaliada a possibilidade de utilizar uma biblioteca alternativa chamada [style-dictionary-figma-flutter](https://github.com/aloisdeniel/style-dictionary-figma-flutter), que utiliza internamente o `style-dictionary`, mas sua configuração é bem limitada, o que impossibilita a personalização da configuração. Criei um [fork](https://github.com/pedrox-hs/style-dictionary-figma-flutter) do projeto e realizei algumas alterações, mas ainda assim não obtive sucesso, pois isso demandaria muito mais tempo do que o disponível.
-
-A biblioteca com a proposta inicial - e não concluída - para a geração de código está disponível em [packages/ds/generator](packages/ds/generator), a configuração [packages/ds/config.js](packages/ds/config.js) e o código gerado com o `style-dictionary` em [packages/ds/lib/src/style_dictionary](packages/ds/lib/src/style_dictionary). No entanto, como ficou incompleto, não foi utilizado para a criação dos componentes.
+Também avaliei a possibilidade de usar uma biblioteca alternativa chamada [style-dictionary-figma-flutter](https://github.com/aloisdeniel/style-dictionary-figma-flutter), que utiliza internamente o `style-dictionary`. No entanto, sua configuração é bastante limitada, o que impossibilita a personalização. Criei um [fork](https://github.com/pedrox-hs/style-dictionary-figma-flutter) do projeto e realizei algumas alterações, mas ainda assim não obtive sucesso, pois isso demandaria muito mais tempo do que o disponível.
 
 #### Solução
 
-Todos os tokens foram escritos manualmente no projeto para o pacote [package/ds](packages/ds/lib/src), sendo necessário buscar cada um dos valores no [Figma](https://www.figma.com/file/zPB52VG5uHPB96L9RKJBu0/Processo-Seletivo-Meiuca-%7C-Flutter?node-id=1%3A1302&mode=dev) e transformá-los nos tipos utilizados no Dart/Flutter.
+Pelo fato do suporte ao Flutter ser limitado, foi necessário criar um pacote _Node.js_ localizado em [packages/ds/generator](packages/ds/generator). Este pacote inclui novas ações (`actions`), transformações (`transforms`) e formatos (`formats`) para melhor suportar os tipos usados no Flutter e atender às necessidades do projeto. Embora os recursos ainda sejam básicos, a estrutura aplicada ao pacote permite fácil extensão para dar suporte a novos tipos e formatos.
 
-Organizei os tokens em arquivos separados, de acordo com o contexto do tipo e categoria, e disponibilizei-os como uma biblioteca no projeto.
+Foram criados novos tokens com base nas referências do arquivo de Design Tokens fornecido pela Meiuca. Isso possibilitou a criação de tokens para os componentes, como `heading_small`, `subtitle_small` e `paragraph`.
+
+As configurações do pacote estão disponíveis em [packages/ds/config.js](packages/ds/config.js). Os arquivos de Design Tokens usados como base para a geração de código estão localizados em [packages/ds/properties](packages/ds/properties).
+
+Ao executar o comando `make ds`, o pacote `style-dictionary` é executado, gerando os arquivos de tokens. Em seguida, um analisador de código é aplicado para garantir a conformidade com os padrões de código e formatação.
+
+Aqui está o resultado final do código gerado: [packages/ds/lib/src/style_dictionary.dart](packages/ds/lib/src/style_dictionary.dart).
 
 ### Componentes
 
@@ -117,9 +120,10 @@ Além disso, utilizei a classe [ChangeNotifierProvider](https://docs.flutter.dev
 
 - [SDK Flutter](https://flutter.dev/docs/get-started/install) >=3.13.9
 - Chave de API para a [News API](https://newsapi.org/)
+- [Node.js](https://nodejs.org/en/) >= 14.0.0: Necessário para executar o gerador de código com o `style-dictionary`.
 - Opcional: [make](https://www.gnu.org/software/make/), para facilitar a execução de alguns comandos.
 - Itens opcionais de acordo com a plataforma para a qual deseja compilar:
-    - [Chrome](https://www.google.com/chrome), para compilar para a Web.
+    - [Chrome](https://www.google.com/chrome), que permite o debug quando compilado para Web.
     - [SDK iOS](https://developer.apple.com/xcode/), para compilar para iOS ou macOS.
     - [SDK Android](https://developer.android.com/studio), para compilar para Android.
     - [JDK](https://www.oracle.com/java/technologies/javase-downloads.html), para compilar para Android.
@@ -180,6 +184,7 @@ Uso: make [target]
 target:
   help           Mostra todos os comandos disponíveis com uma breve descrição
   setup          Cria o arquivo .env e instala as dependências
+  ds             Cria/atualiza os dicionários de estilo a partir dos arquivos de Design Tokens
   run            Executa o app Flutter com o arquivo .env; você pode adicionar argumentos adicionais como `make run args='-d chrome'`
   run-web        Executa o app Flutter Web com o arquivo .env
   test-all       Executa todos os testes
@@ -234,13 +239,16 @@ Possíveis evoluções para o projeto:
 - [ ] **Tratamento de Erros:** Melhorar o tratamento de erros, exibindo mensagens mais amigáveis e tratando erros específicos;
 - [ ] **Skeletons:** Implementar skeletons para melhorar a experiência do usuário enquanto os dados são carregados;
 - [ ] **Icone da Aplicação:** Criar um ícone para a aplicação;
-- [ ] **Scroll Infinito:** Melhorar a experiência do scroll infinito, incluindo loading e feedback de erro;
-- [ ] **Automatizar a Geração de Código a partir do Arquivo de Design Tokens:** Com tempo hábil e alinhamento com o time de design e outros desenvolvedores, seria possível automatizar a geração de código a partir do arquivo exportado pelo Figma, utilizando o `style-dictionary` em uma biblioteca própria para o Flutter;
-- [ ] **Design Tokens de Componentes:** Criar um arquivo de Design Tokens específico para os componentes, utilizando a sintaxe do `style-dictionary` para facilitar a geração de código;
+- [ ] **Melhorar Scroll Infinito:** Aprimorar a experiência do scroll infinito, incluindo loading, feedback de erro e evitar noticias repetidas incluindo a data como parâmetro na requisição;
+- [x] **Automatizar a Geração de Código a partir do Arquivo de Design Tokens:** Com tempo hábil e alinhamento com o time de design e outros desenvolvedores, seria possível automatizar a geração de código a partir do arquivo exportado pelo Figma, utilizando o `style-dictionary` em uma biblioteca própria para o Flutter;
+- [ ] **Aprimorar Gerador de StyleDictionary:** Aprimorar o gerador de código para que seja possível utilizar referências entre tokens, como `$spacing-1: $spacing-2`;
+- [ ] **Dark Mode:** Implementar o dark mode;
+- [x] **Design Tokens de Componentes:** Criar um arquivo de Design Tokens específico para o estilo dos componentes, utilizando a sintaxe do `style-dictionary` para facilitar a geração de código;
 - [ ] **Galeria do DS:** Criar uma galeria com todos os componentes do DS, para facilitar a visualização e testes dos componentes, que pode ser automatizada;
 - [ ] **CI/CD:** Configurar o CI/CD para executar os testes, análise estática e gerar os artefatos de compilação para as plataformas suportadas, inclusive publicando-os em suas respectivas lojas e no GitHub Pages;
 - [ ] **Mais Testes:** Implementar mais testes unitários, de integração e de UI, inclusive para os componentes e interações;
 - [ ] **Firebase Crashlytics:** Configurar o Firebase Crashlytics para monitorar os erros e falhas do aplicativo.
+- [ ] **Contribuir com o StyleDictionary:** Contribuir com o projeto [style-dictionary](https://amzn.github.io/style-dictionary/#/) para melhorar o suporte ao Flutter.
 
 <!--
 Para eventuais consultas e dar transparência:
