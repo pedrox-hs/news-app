@@ -62,19 +62,13 @@ module.exports = {
   'size/flutter/radius': {
     type: 'value',
     matcher: ({ value, attributes: { type } }) =>
-      type === 'radius' && value.split(' ').length === 1,
+      type === 'radius' &&
+      value.split(' ').length === 1 &&
+      // currently Flutter does not support percentage radius
+      // issue: https://github.com/flutter/flutter/issues/135689
+      !value.includes('%'),
     transformer: token => {
-      let value = parseFloat(token.value, 10)
-      if (token.value.includes('%')) {
-        value = value / 100
-        // currently Flutter does not support percentage radius
-        // issue: https://github.com/flutter/flutter/issues/135689
-        // adding this below transformation, will delegates to the consumer
-        // to provide an import with a custom implementation of `PercentageBorderRadius`
-        // I don't know what is the best way to handle it, but this is the best I can think of
-        console.info('Please provide an import with a custom implementation of `PercentageBorderRadius`')
-        return `PercentageBorderRadius.all(Radius.circular(${value.toFixed(2)}))`
-      }
+      const value = parseFloat(token.value, 10)
       return `BorderRadius.all(Radius.circular(${value.toFixed(2)}))`
     },
   },

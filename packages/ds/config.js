@@ -1,5 +1,24 @@
 const StyleDictionary = require('style-dictionary-generator')
 
+// override 'size/flutter/radius' transform
+// because we need to support percentage radius
+// unfortunately, Flutter does not support it yet
+// issue: https://github.com/flutter/flutter/issues/135689
+StyleDictionary.registerTransform({
+  name: 'size/flutter/radius',
+  type: 'value',
+  matcher: ({ value, attributes: { type } }) =>
+    type === 'radius' && value.split(' ').length === 1,
+  transformer: token => {
+    let value = parseFloat(token.value, 10)
+    if (token.value.includes('%')) {
+      value = value / 100
+      return `PercentageBorderRadius.all(Radius.circular(${value.toFixed(2)}))`
+    }
+    return `BorderRadius.all(Radius.circular(${value.toFixed(2)}))`
+  },
+})
+
 module.exports = StyleDictionary.extend({
   source: [
     'properties/**/*.json',
