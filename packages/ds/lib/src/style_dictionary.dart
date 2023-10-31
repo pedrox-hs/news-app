@@ -10,7 +10,7 @@ class JDesignTokens {
   static const assetSizeLg = Size(96.00, 96.00);
   static const assetIllustrationError =
       LocalSvgAsset('packages/ds/assets/illustrations/generic_error.svg');
-  // endregion: Asset
+  // endregion
 
   // region: Border
   static const borderRadiusNone = BorderRadius.all(Radius.circular(0.00));
@@ -19,7 +19,7 @@ class JDesignTokens {
   static const borderSizeThin = 2.00;
   static const borderSizeThick = 4.00;
   static const borderSizeHeavy = 8.00;
-  // endregion: Border
+  // endregion
 
   // region: Button
   static final buttonStylePrimary = ButtonStyleData(
@@ -28,27 +28,27 @@ class JDesignTokens {
       fontSize: 20.00,
       fontWeight: FontWeight.w600,
       height: 1.00,
-      color: Color(0xFF000000),
+      color: Color(0xFFFFFFFF),
     ),
     backgroundColor: const Color(0xFFF04E23),
-    overlayColor: const Color(0xFFFBD1C6),
+    overlayColor: const Color(0xFF8F260A),
     padding: const EdgeInsets.symmetric(vertical: 16.00, horizontal: 24.00),
     borderRadius: const BorderRadius.all(Radius.circular(0.00)),
   );
-  // endregion: Button
+  // endregion
 
   // region: Color
-  static const brandColorPrimary1 = Color(0xFFFEF0EC);
-  static const brandColorPrimary2 = Color(0xFFFBD1C6);
+  static const brandColorPrimary1 = Color(0xFF691C07);
+  static const brandColorPrimary2 = Color(0xFF8F260A);
   static const brandColorPrimary3 = Color(0xFFF04E23);
-  static const brandColorPrimary4 = Color(0xFF8F260A);
-  static const brandColorPrimary5 = Color(0xFF691C07);
-  static const neutralColor1 = Color(0xFFFFFFFF);
-  static const neutralColor2 = Color(0xFFE4E5E7);
+  static const brandColorPrimary4 = Color(0xFFFBD1C6);
+  static const brandColorPrimary5 = Color(0xFFFEF0EC);
+  static const neutralColor1 = Color(0xFF000000);
+  static const neutralColor2 = Color(0xFF70747B);
   static const neutralColor3 = Color(0xFFA6AAAF);
-  static const neutralColor4 = Color(0xFF70747B);
-  static const neutralColor5 = Color(0xFF000000);
-  // endregion: Color
+  static const neutralColor4 = Color(0xFFE4E5E7);
+  static const neutralColor5 = Color(0xFFFFFFFF);
+  // endregion
 
   // region: Font
   static const fontSizeXxxs = 12.00;
@@ -66,7 +66,7 @@ class JDesignTokens {
   static const fontWeightBold = FontWeight.w700;
   static const fontWeightMedium = FontWeight.w600;
   static const fontWeightRegular = FontWeight.w400;
-  // endregion: Font
+  // endregion
 
   // region: Opacity
   static const opacityLevelSemiopaque = 0.80;
@@ -74,7 +74,7 @@ class JDesignTokens {
   static const opacityLevelMedium = 0.32;
   static const opacityLevelLight = 0.16;
   static const opacityLevelSemitransparent = 0.08;
-  // endregion: Opacity
+  // endregion
 
   // region: Radius
   static const radiusSizeNone = BorderRadius.all(Radius.circular(0.00));
@@ -84,7 +84,7 @@ class JDesignTokens {
   static const radiusSizePill = BorderRadius.all(Radius.circular(500.00));
   static const radiusSizeCircular =
       PercentageBorderRadius.all(Radius.circular(0.50));
-  // endregion: Radius
+  // endregion
 
   // region: Shadow
   static const shadowLevel1 =
@@ -95,17 +95,17 @@ class JDesignTokens {
       Shadow(blurRadius: 32.00, offset: Offset(0.00, 16.00));
   static const shadowLevel4 =
       Shadow(blurRadius: 48.00, offset: Offset(0.00, 16.00));
-  // endregion: Shadow
+  // endregion
 
   // region: Shape
   static const shapeBox1 = ShapeStyleData(
     padding: EdgeInsets.all(40.00),
     borderRadius: BorderRadius.all(Radius.circular(0.00)),
     borderWidth: 2.00,
-    borderColor: Color(0xFF70747B),
-    backgroundColor: Color(0xFF000000),
+    borderColor: Color(0xFFE4E5E7),
+    backgroundColor: Color(0xFFFFFFFF),
   );
-  // endregion: Shape
+  // endregion
 
   // region: Spacing
   static const spacingSizeQuarck = EdgeInsets.only(bottom: 4.00);
@@ -135,7 +135,7 @@ class JDesignTokens {
   static const spacingInsetSizeSm = EdgeInsets.all(24.00);
   static const spacingInsetSizeMd = EdgeInsets.all(32.00);
   static const spacingInsetSizeLg = EdgeInsets.all(40.00);
-  // endregion: Spacing
+  // endregion
 
   // region: Typography
   static const textStyleHeadingSmall = TextStyle(
@@ -143,21 +143,21 @@ class JDesignTokens {
     fontSize: 32.00,
     fontWeight: FontWeight.w700,
     height: 1.50,
-    color: Color(0xFFFFFFFF),
+    color: Color(0xFF000000),
   );
   static const textStyleSubtitleSmall = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 24.00,
     fontWeight: FontWeight.w600,
     height: 1.10,
-    color: Color(0xFFE4E5E7),
+    color: Color(0xFF70747B),
   );
   static const textStyleParagraph = TextStyle(
     fontFamily: 'Archivo',
     fontSize: 16.00,
     fontWeight: FontWeight.w400,
     height: 1.50,
-    color: Color(0xFFE4E5E7),
+    color: Color(0xFF70747B),
   );
-  // endregion: Typography
+  // endregion
 }

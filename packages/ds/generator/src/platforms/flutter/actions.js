@@ -53,7 +53,7 @@ module.exports = {
           return [
             `\n  // region: ${className}`,
             ...lines,
-            `  // endregion: ${className}`,
+            '  // endregion',
           ]
         })
 
