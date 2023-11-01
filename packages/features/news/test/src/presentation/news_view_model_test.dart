@@ -12,14 +12,14 @@ void main() {
   group(NewsViewModel, () {
     late NewsViewModel sut;
     late GetNewsUseCase mockGetNews;
-    late IAppNavigator mockNavigator;
+    late IUrlNavigation mockNavigation;
 
     setUp(() {
       mockGetNews = _MockGetNewsUseCase();
-      mockNavigator = _MockAppNavigator();
+      mockNavigation = _MockUrlNavigation();
       sut = NewsViewModel.create(
         getNews: mockGetNews,
-        navigator: mockNavigator,
+        urlNavigation: mockNavigation,
       );
     });
 
@@ -35,7 +35,7 @@ void main() {
       'readMore should call navigator with article',
       () async {
         // arrange
-        when(() => mockNavigator.openUrl(any()))
+        when(() => mockNavigation.open(any()))
             .thenAnswer((_) => Future.value());
         const article = Article(
           title:
@@ -53,7 +53,7 @@ void main() {
 
         // assert
         verify(
-          () => mockNavigator.openUrl(
+          () => mockNavigation.open(
             'https://arstechnica.com/security/2023/10/iphone-privacy-feature-hiding-wi-fi-macs-has-failed-to-work-for-3-years/',
           ),
         ).called(1);
@@ -221,6 +221,6 @@ void main() {
 
 class _MockGetNewsUseCase extends Mock implements GetNewsUseCase {}
 
-class _MockAppNavigator extends Mock implements IAppNavigator {}
+class _MockUrlNavigation extends Mock implements IUrlNavigation {}
 
 class _FakeErrorData extends Fake implements ErrorData {}

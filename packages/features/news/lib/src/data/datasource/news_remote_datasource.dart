@@ -1,4 +1,5 @@
-import 'package:network/network.dart';
+import 'package:http/http.dart';
+import 'package:network_extensions/network_extensions.dart';
 
 import '../model/news.dart';
 

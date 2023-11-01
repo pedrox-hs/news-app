@@ -2,10 +2,10 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:commons_foundation/foundation.dart';
-import 'package:commons_testing/unit.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart';
 import 'package:news_feature/src/data/datasource/news_remote_datasource.dart';
+import 'package:testing_commons/testing_commons.dart';
 
 import '../../../fixtures/news.dart';
 
@@ -40,7 +40,11 @@ void main() {
       final url = actualRequest?.url;
       expect(actualRequest, isNotNull);
       expect(url?.withoutQuery(), expectedUri.withoutQuery());
-      expect(url?.queryParameters, containsPair('page', '$randomPage'));
+      expect(url?.queryParameters, allOf(
+        containsPair('sources', 'google-news-br,info-money,globo,blasting-news-br'),
+        containsPair('page', '$randomPage'),
+        containsPair('pageSize', '5'),
+      ));
     });
 
     test('should return news response', () async {

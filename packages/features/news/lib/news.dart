@@ -18,7 +18,7 @@ class NewsModule extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<NewsViewModel>(
           create: (context) => NewsViewModel.create(
-            navigator: context.read(),
+            urlNavigation: context.read(),
             getNews: GetNewsUseCase(
               repository: NewsRepository(
                 remoteDatasource: NewsRemoteDatasource(

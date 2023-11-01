@@ -1,0 +1,10 @@
+name: navigation
+description: Navigation core package
+version: 0.0.1
+
+environment:
+  sdk: '>=3.1.4 <4.0.0'
+
+dev_dependencies:
+  lint_commons:
+    path: ../lint

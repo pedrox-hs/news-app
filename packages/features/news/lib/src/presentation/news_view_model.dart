@@ -12,7 +12,7 @@ abstract class NewsViewModel with ChangeNotifier {
 
   factory NewsViewModel.create({
     required GetNewsUseCase getNews,
-    required IAppNavigator navigator,
+    required IUrlNavigation urlNavigation,
   }) = NewsViewModelBase;
 
   @visibleForTesting
@@ -31,12 +31,12 @@ abstract class NewsViewModel with ChangeNotifier {
 class NewsViewModelBase extends NewsViewModel {
   NewsViewModelBase({
     required GetNewsUseCase getNews,
-    required IAppNavigator navigator,
+    required IUrlNavigation urlNavigation,
   })  : _getNews = getNews,
-        _navigator = navigator;
+        _urlNavigation = urlNavigation;
 
   final GetNewsUseCase _getNews;
-  final IAppNavigator _navigator;
+  final IUrlNavigation _urlNavigation;
 
   bool get _canLoadMore => state.maybeMap(
         completed: (state) => false,
@@ -74,7 +74,7 @@ class NewsViewModelBase extends NewsViewModel {
 
   @override
   Future<void> readMore(Article article) async {
-    await _navigator.openUrl(article.url);
+    await _urlNavigation.open(article.url);
   }
 
   Future<void> _loadFirstPage() async {

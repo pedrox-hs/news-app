@@ -1,21 +1,22 @@
 import 'dart:io';
 
-import 'package:commons_testing/flutter.dart';
 import 'package:http/http.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:navigation/navigation.dart';
 import 'package:news_feature/news.dart';
 import 'package:news_feature/src/presentation/news_page.dart';
 import 'package:provider/provider.dart';
+import 'package:testing_commons/testing_commons.dart';
+import 'package:ui_testing/ui_testing.dart';
 
 void main() {
   group(NewsPage, () {
     late MockHttpClient mockClient;
-    late IAppNavigator mockNavigator;
+    late IUrlNavigation mockNavigation;
 
     setUp(() {
       mockClient = MockHttpClient();
-      mockNavigator = _MockAppNavigator();
+      mockNavigation = _MockUrlNavigation();
     });
 
     goldenTest(
@@ -30,7 +31,7 @@ void main() {
           builder: () => MultiProvider(
             providers: [
               Provider<Client>.value(value: mockClient),
-              Provider<IAppNavigator>.value(value: mockNavigator),
+              Provider<IUrlNavigation>.value(value: mockNavigation),
             ],
             builder: (_, __) => const NewsModule(),
           ),
@@ -50,7 +51,7 @@ void main() {
           builder: () => MultiProvider(
             providers: [
               Provider<Client>.value(value: mockClient),
-              Provider<IAppNavigator>.value(value: mockNavigator),
+              Provider<IUrlNavigation>.value(value: mockNavigation),
             ],
             builder: (_, __) => const NewsModule(),
           ),
@@ -60,4 +61,4 @@ void main() {
   });
 }
 
-class _MockAppNavigator extends Mock implements IAppNavigator {}
+class _MockUrlNavigation extends Mock implements IUrlNavigation {}

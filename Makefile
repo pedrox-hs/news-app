@@ -1,4 +1,4 @@
-find_packages_depth=4
+find_packages_depth=5
 
 help: ## Mostra todos os comandos disponíveis com uma breve descrição
 	@echo -e "Uso: make [target]\n\ntarget:"
@@ -7,13 +7,13 @@ help: ## Mostra todos os comandos disponíveis com uma breve descrição
 setup: ## Cria o arquivo .env e instala as dependências
 	[ -f .env ] || cp .env.example .env
 	find . -maxdepth $(find_packages_depth) -type f -name pubspec.yaml -execdir flutter pub get \;
-	npm --prefix packages/ds install
+	npm --prefix packages/commons/ui/design_system install
 
 
 ds: ## Cria/atualiza os dicionários de estilo a partir dos arquivos de Design Tokens
-	dart run ds:main build
-	dart fix --apply packages/ds/lib
-	dart format packages/ds/lib
+	dart run design_system:main build
+	dart fix --apply packages/commons/ui/design_system/lib
+	dart format packages/commons/ui/design_system/lib
 
 
 run: ## Executa o app Flutter com o arquivo .env; você pode adicionar argumentos adicionais como `make run args='-d chrome'`

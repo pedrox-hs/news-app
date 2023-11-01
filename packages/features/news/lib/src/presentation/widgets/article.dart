@@ -1,5 +1,5 @@
 import 'package:commons_foundation/foundation.dart';
-import 'package:ds/ds.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/widgets.dart';
 
 import '../../domain/entity/article.dart';

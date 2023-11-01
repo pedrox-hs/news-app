@@ -10,17 +10,21 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.1.0
-  provider: ^6.0.5
-  freezed_annotation: ^2.4.1
-  ds:
-    path: ../../ds
+
+  # local dependencies
+  design_system:
+    path: ../../commons/ui/design_system
   commons_foundation:
     path: ../../commons/foundation
   navigation:
-    path: ../../core/navigation
-  network:
-    path: ../../core/network
+    path: ../../commons/navigation
+  network_extensions:
+    path: ../../commons/network/extensions
+
+  # third party dependencies
+  http: ^1.1.0
+  provider: ^6.0.5
+  freezed_annotation: ^2.4.1
   equatable: ^2.0.5
 
 dev_dependencies:
@@ -28,13 +32,13 @@ dev_dependencies:
     sdk: flutter
   lint_commons:
     path: ../../commons/lint
+  testing_commons:
+    path: ../../commons/testing
+  ui_testing:
+    path: ../../commons/ui/testing
   build_runner: ^2.4.6
   freezed: ^2.4.5
   mocktail: ^1.0.1
-  commons_testing:
-    path: ../../commons/testing
-  alchemist: ^0.7.0
-  golden_toolkit: ^0.15.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

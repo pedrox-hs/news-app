@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:commons_foundation/foundation.dart';
-import 'package:ds/ds.dart';
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

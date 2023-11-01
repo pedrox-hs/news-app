@@ -1,0 +1,19 @@
+{
+  "name": "ds",
+  "version": "1.0.0",
+  "description": "A DS application bridge to run style-dictionary from Dart script",
+  "main": "config.js",
+  "directories": {
+    "properties": "properties"
+  },
+  "author": "Pedro Silva",
+  "license": "MIT",
+  "dependencies": {
+    "style-dictionary": "^3.9.0",
+    "style-dictionary-generator": "file:../tokens_generator"
+  },
+  "devDependencies": {
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0"
+  }
+}
