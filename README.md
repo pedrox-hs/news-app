@@ -125,9 +125,10 @@ Além disso, utilizei a classe [ChangeNotifierProvider](https://docs.flutter.dev
 - Opcional: [make](https://www.gnu.org/software/make/), para facilitar a execução de alguns comandos.
 - Itens opcionais de acordo com a plataforma para a qual deseja compilar:
     - [Chrome](https://www.google.com/chrome), que permite o debug quando compilado para Web.
-    - [SDK iOS](https://developer.apple.com/xcode/), para compilar para iOS ou macOS.
+    - [XCode](https://developer.apple.com/xcode/), para compilar para iOS ou macOS.
     - [SDK Android](https://developer.android.com/studio), para compilar para Android.
     - [JDK](https://www.oracle.com/java/technologies/javase-downloads.html), para compilar para Android.
+    - [Ninja](https://ninja-build.org/), para compilar para Linux.
 
 
 ### Configuração
