@@ -8,8 +8,6 @@ O aplicativo é um agregador de notícias que utiliza a [News API](https://newsa
 
 O desafio consiste em desenvolver componentes utilizando a folha Design Tokens fornecida pela Meiuca. Após a criação dos componentes, desenvolver um aplicativo que os utiliza para exibir as notícias obtidas pela [News API](https://newsapi.org/).
 
-Optei por gerar os tokens manualmente devido a algumas [limitações encontradas](#alguns-dos-problemas-encontrados-foram) ao utilizar [style-dictionary](https://amzn.github.io/style-dictionary/#/). Eles estão disponíveis no pacote [package/ds](packages/ds/lib/src).
-
 Busquei manter a arquitetura o mais independente possível de bibliotecas externas, recorrendo a elas apenas quando absolutamente necessário. Além disso, adotei as melhores práticas de desenvolvimento de software, incluindo a implementação de testes automatizados e arquitetura baseada em Clean Architecture.
 
 ### Design Tokens
